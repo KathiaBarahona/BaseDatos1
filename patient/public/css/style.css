@@ -23,7 +23,7 @@
      
      .navbar-default .navbar-brand {
          font-family: 'Sansita One', cursive;
-         font-size: 25px;
+         font-size: 40px;
          color: #012E40;
      }
      
@@ -47,7 +47,7 @@
      }
      
      .nav>li:hover {
-         background-color: #E5E5E5;
+         background-color: #F2F7F3;
      }
      
      .navbar-default {
