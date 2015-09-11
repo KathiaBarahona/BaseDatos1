@@ -1,33 +1,122 @@
-body {
-    background-color: #FAFBFB;
-}
-
-.container-fluid {
-    background-color: #A1CCBE;
-}
-
-.sanspro {
-    font-family: 'Source Sans Pro', sans-serif;
-    font-size: 17px;
-}
-
-.navbar-default .navbar-brand {
-    font-family: 'Sansita One', cursive;
-    font-size: 25px;
-    color: #012E40;
-}
-
-.navbar-default .navbar-nav>li>a {
-    color: #012E40;
-}
-
-.navbar-default {
-    border-bottom: 1px solid #295E5C;
-}
-
-.dropdown-menu {
-    background-color: #E2EFEB;
-}
-.divider{
-	background-color: white;
-}
+     body {
+         background-color: #FAFBFB;
+         background-image: url('../images/background.jpg');
+     }
+     
+     .container-fluid {
+         background-color: white;
+         position: relative;
+         top: 25px;
+         height: 70px;
+     }
+     
+     .sanspro {
+         font-family: 'Source Sans Pro', sans-serif;
+         font-size: 17px;
+     }
+     
+     .header {
+         font-family: 'Source Sans Pro', sans-serif;
+         font-size: 25px;
+     }
+     
+     .navbar-default .navbar-brand {
+         font-family: 'Sansita One', cursive;
+         font-size: 25px;
+         color: #012E40;
+     }
+     
+     .navbar-default .navbar-nav>li>a {
+         color: #012E40;
+     }
+     
+     .navbar-default {
+         border-bottom: 1px solid #295E5C;
+         opacity: 0.89;
+     }
+     
+     .dropdown-menu {
+         background-color: white;
+     }
+     
+     .nav>li:hover {
+         background-color: #E5E5E5;
+     }
+     
+     .Kathia {
+         margin-right: auto;
+         margin-left: auto;
+         background-color: #D9D6A7;
+         height: 80%;
+         width: 80%;
+     }
+     
+     .navbar-default {
+         border-bottom: 1px solid #295E5C;
+         position: relative;
+         top: 100px;
+         margin-left: auto;
+         margin-right: auto;
+         height: 100px;
+         width: 90%;
+     }
+     
+     #bs-example-navbar-collapse-1 {
+         position: relative;
+         top: 20px;
+     }
+     
+     .maincontainer {
+         width: 90%;
+         position: relative;
+         background-color: white;
+         border: 2px solid #647F76;
+         top: 200px;
+         height: 300px;
+         margin-left: auto;
+         margin-right: auto;
+         opacity: 0.89;
+     }
+     
+     .appointcontainer {
+         margin-right: 100px;
+         margin-left: 100px;
+     }
+     
+     .btn {
+         padding: 14px 24px;
+         border: 0 none;
+         font-weight: 700;
+         letter-spacing: 1px;
+         text-transform: uppercase;
+     }
+     
+     .btn:focus,
+     .btn:active:focus,
+     .btn.active:focus {
+         outline: 0 none;
+     }
+     
+     .btn-primary {
+         background: #3E7F6A;
+         color: #ffffff;
+     }
+     
+     .btn-primary:hover,
+     .btn-primary:focus,
+     .btn-primary:active,
+     .btn-primary.active,
+     .open > .dropdown-toggle.btn-primary {
+         background: #69B69D;
+     }
+     
+     .btn-primary:active,
+     .btn-primary.active {
+         background: #007299;
+         box-shadow: none;
+     }
+     
+     .form-group {
+         font-family: 'Josefin Sans', sans-serif;
+         font-size: 15px;
+     }

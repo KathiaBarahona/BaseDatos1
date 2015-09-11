@@ -5,16 +5,30 @@ angular.module('patientApp', ['ui.router'])
         '$urlRouterProvider',
         function($stateProvider, $urlRouterProvider) {
 
-            $stateProvider.state('/', {
-                url: '/',
-                templateUrl: 'views/patient.view.html',
-                controller: 'PatientCtrl'
-            });
-        
+            $stateProvider
+                .state('home', {
+                    url: '/:patientID',
+                    templateUrl: 'views/appointment.view.html',
+                    controller: function($scope, $stateParams) {
+                        $scope.patientid = $stateParams.patientID
+                        console.log($scope.patientid)
+                    }
+                })
+                .state('history', {
+                    url: '/history/:patientID',
+                    templateUrl: 'views/history.view.html',
+                    controller: function($scope, $stateParams) {
+                        $scope.patientid = $stateParams.patientID
+                    }
+                })
+                .state('profile', {
+                    url: '/profile/:patientID',
+                    templateUrl: 'views/profile.view.html',
+                    controller: function($scope, $stateParams) {
+                        $scope.patientid = $stateParams.patientID
+                    }
+                })
 
-            $urlRouterProvider.otherwise('/');
+            $urlRouterProvider.otherwise('home');
         }
     ])
-    .controller('PatientCtrl', ['$scope', '$http', function($scope, $http) {
-        $scope.name = 'Kathia'
-    }])
