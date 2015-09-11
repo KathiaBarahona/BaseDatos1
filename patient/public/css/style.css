@@ -1,0 +1,33 @@
+body {
+    background-color: #FAFBFB;
+}
+
+.container-fluid {
+    background-color: #A1CCBE;
+}
+
+.sanspro {
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 17px;
+}
+
+.navbar-default .navbar-brand {
+    font-family: 'Sansita One', cursive;
+    font-size: 25px;
+    color: #012E40;
+}
+
+.navbar-default .navbar-nav>li>a {
+    color: #012E40;
+}
+
+.navbar-default {
+    border-bottom: 1px solid #295E5C;
+}
+
+.dropdown-menu {
+    background-color: #E2EFEB;
+}
+.divider{
+	background-color: white;
+}
