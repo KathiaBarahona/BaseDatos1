@@ -5,10 +5,12 @@ angular.module('doctorApp', ['ui.router'])
         '$urlRouterProvider',
         function($stateProvider, $urlRouterProvider) {
 
-            $stateProvider.state('/', {
-                url: '/',
-                templateUrl: 'views/doctor.view.html',
-                controller: 'DoctorCtrl'
+            $stateProvider.state('registry', {
+                url: '/:doctorID',
+                templateUrl: 'views/registry.view.html',
+                controller: function($scope,$stateParams){
+                    $scope.doctorId = $stateParams.doctorID
+                }
             });
         
 

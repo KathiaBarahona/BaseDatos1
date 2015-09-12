@@ -1,7 +1,7 @@
 {
-  "name"         : "patientapp",
+  "name"         : "Doctorapp",
   "version"      : "0.0.0",
-  "description"  : "Aplicacion para paciente",
+  "description"  : "Aplicacion para doctor",
   "main"         : "server.js",
   "author"       : "",
   "dependencies" : {
