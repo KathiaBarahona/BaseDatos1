@@ -24,21 +24,21 @@ angular.module('doctorApp', ['ui.router'])
                     url: '/login',
                     templateUrl: 'views/login.view.html',
                     controller: function($scope, $stateParams) {
-                        $("#wrapper").toggleClass("toggled");
-                        if ($('#togglemenu').hasClass('outmenu')) {
-                            $('#togglemenu').removeClass('outmenu');
-                        }
-                        $('.menu-toggle').hide();
+                        // $("#wrapper").toggleClass("toggled");
+                        // if ($('#togglemenu').hasClass('outmenu')) {
+                        //     $('#togglemenu').removeClass('outmenu');
+                        // }
+                        //$('.menu-toggle').hide();
                         $('#login-form-link').click(function(e) {
-                            $("#login-form").delay(100).fadeIn(100);
-                            $("#register-form").fadeOut(100);
+                            $("#login-form").delay(500).fadeIn(500);
+                            $("#register-form").fadeOut(500);
                             $('#register-form-link').removeClass('active');
                             $(this).addClass('active');
                             e.preventDefault();
                         });
                         $('#register-form-link').click(function(e) {
-                            $("#register-form").delay(100).fadeIn(100);
-                            $("#login-form").fadeOut(100);
+                            $("#register-form").delay(500).fadeIn(500);
+                            $("#login-form").fadeOut(500);
                             $('#login-form-link').removeClass('active');
                             $(this).addClass('active');
                             e.preventDefault();

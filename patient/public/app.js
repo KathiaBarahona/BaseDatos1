@@ -10,11 +10,11 @@ angular.module('patientApp', ['ui.router'])
                     url: '/home/:patientID',
                     templateUrl: 'views/appointment.view.html',
                     controller: function($scope, $stateParams) {
-                        $scope.patientid = $stateParams.patientID  
-                        if ($scope.patientid == ''){
-                            window.location.href = "#/login"
+                        $scope.patientid = $stateParams.patientID
+                        if ($scope.patientid == '') {
+                            //  window.location.href = "#/login"
                         }
-                           
+
                     }
                 })
                 .state('history', {
@@ -22,8 +22,8 @@ angular.module('patientApp', ['ui.router'])
                     templateUrl: 'views/history.view.html',
                     controller: function($scope, $stateParams) {
                         $scope.patientid = $stateParams.patientID
-                        if ($scope.patientid == '')
-                            window.location.href = "#/login"
+                        if ($scope.patientid == '') {}
+                        //  window.location.href = "#/login"
                     }
                 })
                 .state('profile', {
@@ -31,15 +31,15 @@ angular.module('patientApp', ['ui.router'])
                     templateUrl: 'views/profile.view.html',
                     controller: function($scope, $stateParams) {
                         $scope.patientid = $stateParams.patientID
-                        if ($scope.patientid == '')
-                            window.location.href = "#/login"
+                        if ($scope.patientid == '') {}
+                        // window.location.href = "#/login"
                     }
                 })
                 .state('login', {
                     url: '/login',
                     templateUrl: 'views/login.view.html',
                     controller: function($scope, $stateParams) {
-                        $('.navbar-right').hide()
+                        // $('.navbar-right').hide()
 
                     }
                 })
