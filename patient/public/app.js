@@ -7,11 +7,14 @@ angular.module('patientApp', ['ui.router'])
 
             $stateProvider
                 .state('home', {
-                    url: '/:patientID',
+                    url: '/home/:patientID',
                     templateUrl: 'views/appointment.view.html',
                     controller: function($scope, $stateParams) {
-                        $scope.patientid = $stateParams.patientID
-                        console.log($scope.patientid)
+                        $scope.patientid = $stateParams.patientID  
+                        if ($scope.patientid == ''){
+                            window.location.href = "#/login"
+                        }
+                           
                     }
                 })
                 .state('history', {
@@ -19,6 +22,8 @@ angular.module('patientApp', ['ui.router'])
                     templateUrl: 'views/history.view.html',
                     controller: function($scope, $stateParams) {
                         $scope.patientid = $stateParams.patientID
+                        if ($scope.patientid == '')
+                            window.location.href = "#/login"
                     }
                 })
                 .state('profile', {
@@ -26,9 +31,19 @@ angular.module('patientApp', ['ui.router'])
                     templateUrl: 'views/profile.view.html',
                     controller: function($scope, $stateParams) {
                         $scope.patientid = $stateParams.patientID
+                        if ($scope.patientid == '')
+                            window.location.href = "#/login"
+                    }
+                })
+                .state('login', {
+                    url: '/login',
+                    templateUrl: 'views/login.view.html',
+                    controller: function($scope, $stateParams) {
+                        $('.navbar-right').hide()
+
                     }
                 })
 
-            $urlRouterProvider.otherwise('home');
+            $urlRouterProvider.otherwise('login');
         }
     ])
