@@ -39,7 +39,7 @@ app.post('/login', function (req,res){
                     res.status(401).end();
                 }else{                    
                     recordset.forEach(function(entry) {
-                        if(entry.id_paciente == req.body.id_paciente && entry.contraseña == req.body.contraseña){
+                        if(entry.id_paciente == req.body.id_paciente && entry.contraseña == req.body.password){
                             autenticado = true;
                             current_patient = entry.id_paciente;
                         }
@@ -69,7 +69,7 @@ app.post('/registry', function(req,res){
             request.query("insert into Pacientes values('"+req.body.id_paciente+"','"+req.body.nombres+"','"+req.body.apellidos+"','"
                             +req.body.contac_emer+"','"+req.body.ocupacion+"','"+req.body.email+"','"+req.body.fecha_nac+"','"
                             +req.body.estado_marital+"','"+req.body.sexo+"','"+req.body.tipo_sangre+"','"+req.body.direccion+"','"
-                            +req.body.fecha_registro+"','"+req.body.contraseña+"')", 
+                            +req.body.fecha_registro+"','"+req.body.password+"')", 
                 function(err, recordset) {
                 if (err) {
                     console.log("Error query");
