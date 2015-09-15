@@ -30,13 +30,13 @@ app.post('/login', function (req,res){
     var connection = new sql.Connection(config, function(err) {
         if (err) {
             console.log("Error conexion");
-            res.status(401).end();
+            res.status(400).end();
         }else{
             var request = connection.request();
             request.query('select id_paciente,password from Pacientes', function(err, recordset) {
                 if (err) {
                     console.log("Error query");
-                    res.status(401).end();
+                    res.status(400).end();
                 }else{                    
                     recordset.forEach(function(entry) {
                         if(entry.id_paciente == req.body.id_paciente && entry.password == req.body.password){
@@ -48,6 +48,7 @@ app.post('/login', function (req,res){
                         //res.redirect('/registry');
                         res.status(200).end();                      
                     }else{
+                        console.log("no encontrado");
                         //res.redirect('/login');
                         res.status(401).end();                      
                     }
