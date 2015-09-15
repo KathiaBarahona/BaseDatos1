@@ -50,7 +50,7 @@ angular.module('patientApp', ['ui.router'])
                             var url = "#/profile/" + $stateParams.patientID
                             window.location.href = url;
                         }
-                       
+
                     }
                 }
             }
@@ -58,8 +58,11 @@ angular.module('patientApp', ['ui.router'])
 
     )
     .controller('appointmentCtrl', ['$scope', '$http', '$stateParams', function($scope, $http, $stateParams) {
+        $('#sandbox-container input').datepicker({
+            format: "yyyy/mm/dd"
+        });
         $scope.patientid = $stateParams.patientID
-        if ($scope.patientid == '' || $scope.patientid == 'undefined' ) {
+        if ($scope.patientid == '' || $scope.patientid == 'undefined') {
             window.location.href = "#/login"
         }
     }])
