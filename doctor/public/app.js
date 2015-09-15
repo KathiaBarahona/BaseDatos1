@@ -11,6 +11,9 @@ angular.module('doctorApp', ['ui.router'])
                     templateUrl: 'views/registry.view.html',
                     controller: function($scope, $stateParams) {
                         $scope.doctorId = $stateParams.doctorID
+                        if ($scope.doctorId == '') {
+                            window.location.href = "#/login"
+                        }
                     }
                 })
                 .state('appointments', {
@@ -18,17 +21,43 @@ angular.module('doctorApp', ['ui.router'])
                     templateUrl: 'views/appointments.view.html',
                     controller: function($scope, $stateParams) {
                         $scope.doctorId = $stateParams.doctorID
+                        if ($scope.doctorId == '') {
+                            window.location.href = "#/login"
+                        }
                     }
                 })
                 .state('login', {
                     url: '/login',
                     templateUrl: 'views/login.view.html',
                     controller: function($scope, $stateParams) {
-                        // $("#wrapper").toggleClass("toggled");
-                        // if ($('#togglemenu').hasClass('outmenu')) {
-                        //     $('#togglemenu').removeClass('outmenu');
-                        // }
-                        //$('.menu-toggle').hide();
+                        $scope.doctors = [{
+                            doctorId: '1',
+                            password: '123456'
+                        }, {
+                            doctorId: '2',
+                            password: '123456'
+                        }]
+                        $scope.doctor = {};
+                        $scope.login = function() {
+                            $.each($scope.doctors, function(index, element) {
+
+                                if (element.doctorId == $scope.doctor.doctorId && element.password == $scope.doctor.password) {
+
+                                    window.location.href = "#/registry:" + element.doctorId;
+
+                                }
+
+                            })
+
+                        }
+                        $scope.doctorRegistry = function() {
+
+                            }
+                            // $("#wrapper").toggleClass("toggled");
+                            // if ($('#togglemenu').hasClass('outmenu')) {
+                            //     $('#togglemenu').removeClass('outmenu');
+                            // }
+                            //$('.menu-toggle').hide();
                         $('#login-form-link').click(function(e) {
                             $("#login-form").delay(500).fadeIn(500);
                             $("#register-form").fadeOut(500);
