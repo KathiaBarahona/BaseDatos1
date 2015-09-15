@@ -50,7 +50,7 @@ angular.module('patientApp', ['ui.router'])
                             var url = "#/profile/" + $stateParams.patientID
                             window.location.href = url;
                         }
-                       
+
                     }
                 }
             }
@@ -58,8 +58,11 @@ angular.module('patientApp', ['ui.router'])
 
     )
     .controller('appointmentCtrl', ['$scope', '$http', '$stateParams', function($scope, $http, $stateParams) {
+        $('#sandbox-container input').datepicker({
+            format: "yyyy/mm/dd"
+        });
         $scope.patientid = $stateParams.patientID
-        if ($scope.patientid == '' || $scope.patientid == 'undefined' ) {
+        if ($scope.patientid == '' || $scope.patientid == 'undefined') {
             window.location.href = "#/login"
         }
     }])
@@ -68,6 +71,7 @@ angular.module('patientApp', ['ui.router'])
         if ($scope.patientid == '' || $scope.patientid == 'undefined') {
             window.location.href = "#/login"
         }
+
     }])
     .controller('profileCtrl', ['$scope', '$http', '$stateParams', function($scope, $http, $stateParams) {
         $scope.patientid = $stateParams.patientID
@@ -76,5 +80,156 @@ angular.module('patientApp', ['ui.router'])
         }
     }])
     .controller('loginCtrl', ['$scope', '$http', '$stateParams', function($scope, $http, $stateParams) {
+        $('#sandbox-container input').datepicker({
+            format: "yyyy/mm/dd"
+        });
+        $scope.patient;
+        $scope.login = function() {
+            $http.post('/login', {
+                "id_paciente": $scope.patient.id_paciente,
+                "password": $scope.patient.password
+            }).success(function(response) {
+                if (response == 'existe') {
+                    window.location.href = "#/home/" + $scope.patient.id_paciente;
+                } else {
+                    $('warning2').show();
+                }
 
+            })
+        }
+        $scope.valid = function() {
+            var bool = true;
+
+            if ($scope.patient.tipo_sangre == undefined) {
+                $('.warning').show();
+                bool = false;
+                $('.bloodpatient').css('border-color', 'red');
+            } else {
+                $('.bloodpatient').css('border-color', 'green');
+            }
+            if ($scope.patient.sexo == undefined) {
+                $('.warning').show();
+                bool = false;
+                $('.sexpatient').css('border-color', 'red');
+            } else {
+                $('.sexpatient').css('border-color', 'green');
+            }
+            if ($scope.patient.password2 == undefined) {
+                $('.warning').show();
+                bool = false;
+                $('.password2patient').css('border-color', 'red');
+            } else {
+                $('.password2patient').css('border-color', 'green');
+            }
+            if ($scope.patient.password == undefined) {
+                $('.warning').show();
+                bool = false;
+                $('.passwordpatient').css('border-color', 'red');
+            } else {
+                $('.passwordpatient').css('border-color', 'green');
+            }
+            if ($scope.patient.password != $scope.patient.password2) {
+                $('.warning').show();
+                bool = false;
+                $('.password2patient').css('border-color', 'red');
+                $('.passwordpatient').css('border-color', 'red');
+            }
+            if ($scope.patient.ocupacion == undefined) {
+                $('.warning').show();
+                bool = false;
+                $('.jobpatient').css('border-color', 'red');
+            } else {
+                $('.jobpatient').css('border-color', 'green');
+            }
+            if ($scope.patient.fecha_nac == undefined) {
+                $('.warning').show();
+                bool = false;
+                $('.datepatient').css('border-color', 'red');
+            } else {
+                $('.datepatient').css('border-color', 'green');
+            }
+            if ($scope.patient.id_paciente == undefined) {
+                $('.warning').show();
+                bool = false;
+                $('.idpatient').css('border-color', 'red');
+            } else {
+                $('.idpatient').css('border-color', 'green');
+            }
+            if ($scope.patient.apellidos == undefined) {
+                $('.warning').show();
+                bool = false;
+                $('.lastnamepatient').css('border-color', 'red');
+            } else {
+                $('.lastnamepatient').css('border-color', 'green');
+            }
+            if ($scope.patient.nombres == undefined) {
+                $('.warning').show();
+                bool = false;
+                $('.namepatient').css('border-color', 'red');
+            } else {
+                $('.namepatient').css('border-color', 'green');
+            }
+            if ($scope.patient.direccion == undefined) {
+                $('.warning').show();
+                bool = false;
+                $('.adresspatient').css('border-color', 'red');
+            } else {
+                $('.adresspatient').css('border-color', 'green');
+            }
+            if ($scope.patient.email == undefined) {
+                $('.warning').show();
+                bool = false;
+                $('.emailpatient').css('border-color', 'red');
+            } else {
+                $('.emailpatient').css('border-color', 'green');
+            }
+            if ($scope.patient.contact_emer == undefined) {
+                $('.warning').show();
+                bool = false;
+                $('.contactpatient').css('border-color', 'red');
+            } else {
+                $('.contactpatient').css('border-color', 'green');
+            }
+            if ($scope.patient.estado_marital == undefined) {
+                $('.warning').show();
+                bool = false;
+                $('.statepatient').css('border-color', 'red');
+            } else {
+                $('.statepatient').css('border-color', 'green');
+            }
+            return bool;
+        }
+
+        $scope.registry = function() {
+            if ($scope.valid()) {
+                Date.prototype.yyyymmdd = function() {
+                    var yyyy = this.getFullYear().toString();
+                    var mm = (this.getMonth() + 1).toString(); // getMonth() is zero-based
+                    var dd = this.getDate().toString();
+                    return yyyy + '/' + (mm[1] ? mm : "0" + mm[0]) + '/' + (dd[1] ? dd : "0" + dd[0]); // padding
+                };
+
+                var d = new Date();
+                $scope.patient.fecha_registro = d.yyyymmdd();
+
+                $http.post('/registry', {
+                    "id_paciente": $scope.patient.id_paciente,
+                    "nombres": $scope.patient.nombres,
+                    "apellidos": $scope.patient.apellidos,
+                    "contact_emer": $scope.patient.contact_emer,
+                    "ocupacion": $scope.patient.ocupacion,
+                    "email": $scope.patient.email,
+                    "fecha_nac": $scope.patient.fecha_nac,
+                    "estado_marital": $scope.patient.estado_marital,
+                    "sexo": $scope.patient.sexo,
+                    "tipo_sangre": $scope.patient.tipo_sangre,
+                    "direccion": $scope.patient.direccion,
+                    "fecha_registro": $scope.patient.fecha_registro,
+                    "password": $scope.patient.password
+                }).success(function(response) {
+                    window.location.href = "#/home/" + $scope.patient.id_paciente;
+                })
+            }
+
+        }
     }])

@@ -2,7 +2,10 @@
          background-color: #FAFBFB;
          background-image: url('../images/background.jpg');
      }
-     
+     .warning,.warning2{
+        color: red;
+        display: none;
+     }
      .container-fluid {
          background-color: white;
          position: relative;
@@ -99,7 +102,7 @@
      }
      
      .btn-primary {
-         margin-top: 30px;
+         margin-top: 80px;
          background: #3E7F6A;
          color: #ffffff;
      }
