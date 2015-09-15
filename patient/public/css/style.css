@@ -2,7 +2,10 @@
          background-color: #FAFBFB;
          background-image: url('../images/background.jpg');
      }
-     
+     .warning,.warning2{
+        color: red;
+        display: none;
+     }
      .container-fluid {
          background-color: white;
          position: relative;

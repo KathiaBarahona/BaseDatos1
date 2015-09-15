@@ -29,6 +29,7 @@ app.post('/login', function (req,res){
     autenticado =false;
     var connection = new sql.Connection(config, function(err) {
         if (err) {
+            console.log(err)
             console.log("Error conexion");
             res.status(400).end();
         }else{
