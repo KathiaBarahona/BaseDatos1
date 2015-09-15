@@ -33,13 +33,13 @@ app.post('/login', function (req,res){
         	res.status(400).end();
     	}else{
     		var request = connection.request();
-    		request.query('select id_doctor,contraseña from Doctores', function(err, recordset) {
+    		request.query('select id_doctor,password from Doctores', function(err, recordset) {
     			if (err) {
         			console.log("Error query");
         			res.status(400).end();
     			}else{    				
     				recordset.forEach(function(entry) {
-    					if(entry.id_doctor == req.body.id_doctor && entry.contraseña == req.body.contraseña){
+    					if(entry.id_doctor == req.body.id_doctor && entry.password == req.body.password){
     						autenticado = true;
     						current_doctor = entry.id_doctor;
     					}
@@ -66,7 +66,7 @@ app.post('/registry', function(req,res){
         	res.status(400).end();
     	}else{
     		var request = connection.request();
-    		request.query("insert into Doctores values('"+req.body.id_doctor+"','"+req.body.nombres+"','"+req.body.apellidos+"',"+req.body.honorarios+",'"+req.body.contraseña+"')", 
+    		request.query("insert into Doctores values('"+req.body.id_doctor+"','"+req.body.nombres+"','"+req.body.apellidos+"',"+req.body.honorarios+",'"+req.body.password+"')", 
     			function(err, recordset) {
     			if (err) {
         			console.log("Error query");
