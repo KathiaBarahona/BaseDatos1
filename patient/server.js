@@ -9,8 +9,8 @@ app.use(bodyParser.json());
 app.use(express.static(__dirname + "/public"));
 
 var config = {
-    user: 'xavier_2696',
-    password: 'j8r74e3h',
+    user: 'Kathia',
+    password: 'jblazo123456',
     server: 'localhost', 
     database: 'Hospital',   
 }

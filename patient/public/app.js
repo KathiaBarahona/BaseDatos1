@@ -82,7 +82,7 @@ angular.module('patientApp', ['ui.router'])
     .controller('loginCtrl', ['$scope', '$http', '$stateParams', function($scope, $http, $stateParams) {
         $scope.patient;
         $scope.login = function(){
-            $http.post('/login',$scope.patient).success(function(response){
+            $http.post('/login',{"id_paciente":$scope.patient.id_paciente,"password":$scope.patient.password}).success(function(response){
                  console.log(response)
             })
         }
