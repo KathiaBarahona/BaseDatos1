@@ -33,13 +33,13 @@ app.post('/login', function (req,res){
             res.status(401).end();
         }else{
             var request = connection.request();
-            request.query('select id_paciente,contraseña from Pacientes', function(err, recordset) {
+            request.query('select id_paciente,password from Pacientes', function(err, recordset) {
                 if (err) {
                     console.log("Error query");
                     res.status(401).end();
                 }else{                    
                     recordset.forEach(function(entry) {
-                        if(entry.id_paciente == req.body.id_paciente && entry.contraseña == req.body.password){
+                        if(entry.id_paciente == req.body.id_paciente && entry.password == req.body.password){
                             autenticado = true;
                             current_patient = entry.id_paciente;
                         }
