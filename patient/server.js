@@ -9,8 +9,8 @@ app.use(bodyParser.json());
 app.use(express.static(__dirname + "/public"));
 
 var config = {
-    user: 'Kathia',
-    password: 'jblazo123456',
+    user: 'xavier_2696',
+    password: 'j8r74e3h',
     server: 'localhost', 
     database: 'Hospital',   
 }
@@ -46,6 +46,7 @@ app.post('/login', function (req,res){
                     });
                     if (autenticado){
                         //res.redirect('/registry');
+                        res.send("existe");
                         res.status(200).end();                      
                     }else{
                         console.log("no encontrado");
@@ -84,6 +85,259 @@ app.post('/registry', function(req,res){
                             +req.body.contac_emer+"','"+req.body.ocupacion+"','"+req.body.email+"','"+req.body.fecha_nac+"','"
                             +req.body.estado_marital+"','"+req.body.sexo+"','"+req.body.tipo_sangre+"','"+req.body.direccion+"','"
                             +req.body.fecha_registro+"','"+req.body.contraseña+"')");*/
+        }
+    });
+});
+
+app.get('/doctores', function(req, res){
+    var connection = new sql.Connection(config, function(err) {
+        if (err) {
+            console.log("Error conexion");
+            res.status(400).end();
+        }else{
+            var request = connection.request();
+            request.query("select id_doctor, nombres, apellidos from Doctores",function(err, recordset) {
+                if (err) {
+                    console.log("Error query");
+                    res.status(400).end();
+                }else{
+                    res.contentType('application/json');
+                    res.send(JSON.stringify(recordset));
+                    res.status(200).end();
+                }
+                
+            });
+        }
+    });
+});
+
+app.post('/appointment', function(req, res){
+    var connection = new sql.Connection(config, function(err) {
+        if (err) {
+            console.log("Error conexion");
+            res.status(400).end();
+        }else{
+            var request = connection.request();            
+            request.query("select id_doctor,fecha from Citas", function(err,recordset){
+            //request.query("insert into Citas values('"+req.body.id_doctor+"','"+current_patient+"','"
+            //                +req.body.fecha+"','"+req.body.motivo+"')",function(err, recordset) {
+                if (err) {
+                    console.log("Error query");
+                    res.status(400).end();
+                }else{
+                    recordset.forEach(function(entry) {
+                        if(entry.id_doctor == req.body.id_doctor && entry.fecha == req.body.fecha){
+                            res.status(400).end();
+                        }                       
+                    });
+                }
+                
+            });
+            var request1 = connection.request();
+            request1.query("insert into Citas values('"+req.body.id_doctor+"','"+current_patient+"','"
+                            +req.body.fecha+"','"+req.body.motivo+"')",function(err, recordset) {
+                if (err) {
+                    console.log("Error query");
+                    res.status(400).end();
+                }else{
+                    res.status(200).end();
+                }
+            });
+        }
+    });
+});
+
+app.get('/historial', function(req, res){
+    var connection = new sql.Connection(config, function(err) {
+        if (err) {
+            console.log("Error conexion");
+            res.status(400).end();
+        }else{
+            var request = connection.request();
+            request.query("select * from Registros where id_paciente='"+current_patient+"'",function(err, recordset) {
+                if (err) {
+                    console.log("Error query");
+                    res.status(400).end();
+                }else{
+                    res.contentType('application/json');
+                    res.send(JSON.stringify(recordset));
+                    res.status(200).end();
+                }
+                
+            });            
+        }
+    });
+});
+
+app.get('/sintomas', function(req, res){
+    var connection = new sql.Connection(config, function(err) {
+        if (err) {
+            console.log("Error conexion");
+            res.status(400).end();
+        }else{
+            var request = connection.request();
+            request.query("select sintoma from Registro_Sintomas where id_registro='"+req.body.id_registro+"'",function(err, recordset) {
+                if (err) {
+                    console.log("Error query");
+                    res.status(400).end();
+                }else{
+                    res.contentType('application/json');
+                    res.send(JSON.stringify(recordset));
+                    res.status(200).end();
+                }
+                
+            });            
+        }
+    });
+});
+
+app.get('/medicamentos', function(req, res){
+    var connection = new sql.Connection(config, function(err) {
+        if (err) {
+            console.log("Error conexion");
+            res.status(400).end();
+        }else{
+            var request = connection.request();
+            request.query("select medicamento from Registro_Medicamentos where id_registro='"+req.body.id_registro+"'",function(err, recordset) {
+                if (err) {
+                    console.log("Error query");
+                    res.status(400).end();
+                }else{
+                    res.contentType('application/json');
+                    res.send(JSON.stringify(recordset));
+                    res.status(200).end();
+                }
+                
+            });            
+        }
+    });
+});
+
+
+app.get('/cuenta', function(req, res){
+    var connection = new sql.Connection(config, function(err) {
+        if (err) {
+            console.log("Error conexion");
+            res.status(400).end();
+        }else{
+            var request = connection.request();
+            request.query("select * from Cuentas where id_registro='"+req.body.id_registro+"'",function(err, recordset) {
+                if (err) {
+                    console.log("Error query");
+                    res.status(400).end();
+                }else{
+                    res.contentType('application/json');
+                    res.send(JSON.stringify(recordset));
+                    res.status(200).end();
+                }
+                
+            });            
+        }
+    });
+});
+
+app.get('/examenes', function(req, res){
+    var connection = new sql.Connection(config, function(err) {
+        if (err) {
+            console.log("Error conexion");
+            res.status(400).end();
+        }else{
+            var request = connection.request();
+            request.query("select * from Examenes where id_examen=(select id_examen from Paciente_Examenes where id_registro = '"+req.body.id_registro+"')",function(err, recordset) {
+                if (err) {
+                    console.log("Error query");
+                    res.status(400).end();
+                }else{
+                    res.contentType('application/json');
+                    res.send(JSON.stringify(recordset));
+                    res.status(200).end();
+                }
+                
+            });            
+        }
+    });
+});
+
+app.post('/telefono', function(req, res){
+    var connection = new sql.Connection(config, function(err) {
+        if (err) {
+            console.log("Error conexion");
+            res.status(400).end();
+        }else{
+            var request = connection.request();
+            request.query("insert into Paciente_Telefonos values('"+current_patient+"','"+req.body.telefono+"')",function(err, recordset) {
+                if (err) {
+                    console.log("Error query");
+                    res.status(400).end();
+                }else{
+                    res.status(200).end();
+                }
+                
+            });
+        }
+    });
+});
+
+app.post('/enfermedad', function(req, res){
+    var connection = new sql.Connection(config, function(err) {
+        if (err) {
+            console.log("Error conexion");
+            res.status(400).end();
+        }else{
+            var request = connection.request();
+            request.query("insert into Paciente_Enfermedades values('"+current_patient+"','"+req.body.enfermedad+"')",function(err, recordset) {
+                if (err) {
+                    console.log("Error query");
+                    res.status(400).end();
+                }else{
+                    res.status(200).end();
+                }
+                
+            });
+        }
+    });
+});
+
+app.get('/telefonos', function(req, res){
+    var connection = new sql.Connection(config, function(err) {
+        if (err) {
+            console.log("Error conexion");
+            res.status(400).end();
+        }else{
+            var request = connection.request();
+            request.query("select telefono  from Paciente_Telefonos where id_paciente='"+current_patient+"'",function(err, recordset) {
+                if (err) {
+                    console.log("Error query");
+                    res.status(400).end();
+                }else{
+                    res.contentType('application/json');
+                    res.send(JSON.stringify(recordset));
+                    res.status(200).end();
+                }
+                
+            });
+        }
+    });
+});
+
+app.get('/enfermedades', function(req, res){
+    var connection = new sql.Connection(config, function(err) {
+        if (err) {
+            console.log("Error conexion");
+            res.status(400).end();
+        }else{
+            var request = connection.request();
+            request.query("select enfermedad from Paciente_Enfermedades where id_paciente='"+current_patient+"'",function(err, recordset) {
+                if (err) {
+                    console.log("Error query");
+                    res.status(400).end();
+                }else{
+                    res.contentType('application/json');
+                    res.send(JSON.stringify(recordset));
+                    res.status(200).end();
+                }
+                
+            });
         }
     });
 });
