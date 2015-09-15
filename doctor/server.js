@@ -26,6 +26,7 @@ app.post('/logout' ,function(req, res){
 });
 
 app.post('/login', function (req,res){	 
+    autenticado = false;
 	var connection = new sql.Connection(config, function(err) {
 		if (err) {
         	console.log("Error conexion");
@@ -61,14 +62,14 @@ app.post('/login', function (req,res){
 app.post('/registry', function(req,res){
 	var connection = new sql.Connection(config, function(err) {
 		if (err) {
-        	console.log("Error opening the connection");
+        	console.log("Error conexion");
         	res.status(400).end();
     	}else{
     		var request = connection.request();
     		request.query("insert into Doctores values('"+req.body.id_doctor+"','"+req.body.nombres+"','"+req.body.apellidos+"',"+req.body.honorarios+",'"+req.body.contraseña+"')", 
     			function(err, recordset) {
     			if (err) {
-        			console.log("Error executing the query");
+        			console.log("Error query");
         			res.status(400).end();
     			}else{
     				res.status(200).end();
