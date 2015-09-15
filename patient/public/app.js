@@ -71,6 +71,7 @@ angular.module('patientApp', ['ui.router'])
         if ($scope.patientid == '' || $scope.patientid == 'undefined') {
             window.location.href = "#/login"
         }
+
     }])
     .controller('profileCtrl', ['$scope', '$http', '$stateParams', function($scope, $http, $stateParams) {
         $scope.patientid = $stateParams.patientID
@@ -79,5 +80,11 @@ angular.module('patientApp', ['ui.router'])
         }
     }])
     .controller('loginCtrl', ['$scope', '$http', '$stateParams', function($scope, $http, $stateParams) {
+        $scope.patient;
+        $scope.login = function(){
+            $http.post('/login',$scope.patient).success(function(response){
+                 console.log(response)
+            })
+        }
 
     }])
