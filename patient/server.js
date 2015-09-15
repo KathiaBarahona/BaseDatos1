@@ -9,7 +9,7 @@ app.use(bodyParser.json());
 app.use(express.static(__dirname + "/public"));
 
 var config = {
-    user: 'Kathia',
+    user: 'sa',
     password: 'jblazo123456',
     server: 'localhost', 
     database: 'Hospital',   
@@ -29,6 +29,7 @@ app.post('/login', function (req,res){
     autenticado =false;
     var connection = new sql.Connection(config, function(err) {
         if (err) {
+            console.log(err)
             console.log("Error conexion");
             res.status(400).end();
         }else{
