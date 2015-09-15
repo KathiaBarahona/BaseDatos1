@@ -40,6 +40,7 @@ angular.module('patientApp', ['ui.router'])
                     templateUrl: 'views/login.view.html',
                     controller: function($scope, $stateParams) {
                         // $('.navbar-right').hide()
+                        
 
                     }
                 })
