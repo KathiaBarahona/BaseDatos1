@@ -62,35 +62,68 @@ angular.module('patientApp', ['ui.router'])
             format: "yyyy/mm/dd"
         });
         $scope.patientid = $stateParams.patientID
+
         if ($scope.patientid == '' || $scope.patientid == 'undefined') {
             window.location.href = "#/login"
+        } else {
+            $('.navbar-right').show()
         }
+        $http.get('doctores').success(function(response) {
+            $.each(response, function(i, item) {
+                $('#seldoctores').append($('<option>', {
+                    value: item.id_doctor,
+                    text: item.nombres + ' ' + item.apellidos
+                }));
+            });
+        })
+        $scope.cita = {};
+        $scope.reservarCita = function() {
+           
+            $http.post('/appointment', {
+                "id_doctor": $scope.cita.id_doctor,
+                "id_paciente": $scope.patientid,
+                "fecha": $scope.cita.fecha,
+                "motivo": $scope.cita.motivo
+            }).success(function(){
+                console.log('Hola')
+            })
+        }
+
     }])
     .controller('historyCtrl', ['$scope', '$http', '$stateParams', function($scope, $http, $stateParams) {
         $scope.patientid = $stateParams.patientID
         if ($scope.patientid == '' || $scope.patientid == 'undefined') {
             window.location.href = "#/login"
+        } else {
+            $('.navbar-right').show()
         }
+
 
     }])
     .controller('profileCtrl', ['$scope', '$http', '$stateParams', function($scope, $http, $stateParams) {
         $scope.patientid = $stateParams.patientID
         if ($scope.patientid == '' || $scope.patientid == 'undefined') {
             window.location.href = "#/login"
+        } else {
+            $('.navbar-right').show()
         }
+
     }])
     .controller('loginCtrl', ['$scope', '$http', '$stateParams', function($scope, $http, $stateParams) {
+        $('.navbar-right').hide()
         $('#sandbox-container input').datepicker({
             format: "yyyy/mm/dd"
         });
         $scope.patient;
         $scope.login = function() {
+            $scope.patient.id_paciente = 'P' + $scope.patient.id_paciente;
             $http.post('/login', {
                 "id_paciente": $scope.patient.id_paciente,
                 "password": $scope.patient.password
             }).success(function(response) {
                 if (response == 'existe') {
                     window.location.href = "#/home/" + $scope.patient.id_paciente;
+                    $('.navbar-right').show()
                 } else {
                     $('warning2').show();
                 }
@@ -211,7 +244,7 @@ angular.module('patientApp', ['ui.router'])
 
                 var d = new Date();
                 $scope.patient.fecha_registro = d.yyyymmdd();
-
+                $scope.patient.id_paciente = 'P' + $scope.patient.id_paciente;
                 $http.post('/registry', {
                     "id_paciente": $scope.patient.id_paciente,
                     "nombres": $scope.patient.nombres,
@@ -228,6 +261,7 @@ angular.module('patientApp', ['ui.router'])
                     "password": $scope.patient.password
                 }).success(function(response) {
                     window.location.href = "#/home/" + $scope.patient.id_paciente;
+                    $('.navbar-right').show()
                 })
             }
 

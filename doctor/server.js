@@ -9,11 +9,12 @@ app.use(bodyParser.json());
 app.use(express.static(__dirname + "/public"));
 
 var config = {
-    user: 'xavier_2696',
-    password: 'j8r74e3h',
+    user: 'sa',
+    password: 'jblazo123456',
     server: 'localhost', 
     database: 'Hospital',   
 }
+
 
 var current_doctor = "";
 var autenticado = false;
@@ -30,6 +31,7 @@ app.post('/login', function (req,res){
 	var connection = new sql.Connection(config, function(err) {
 		if (err) {
         	console.log("Error conexion");
+            console.log(err)
         	res.status(400).end();
     	}else{
     		var request = connection.request();
@@ -63,6 +65,7 @@ app.post('/registry', function(req,res){
 	var connection = new sql.Connection(config, function(err) {
 		if (err) {
         	console.log("Error conexion");
+            console.log(err)
         	res.status(400).end();
     	}else{
     		var request = connection.request();

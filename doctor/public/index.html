@@ -14,24 +14,7 @@
 <body ng-app='doctorApp'>
     <div id="wrapper">
         <!-- Sidebar -->
-        <div id="sidebar-wrapper">
-            <ul class="sidebar-nav">
-                <li class="sidebar-brand">
-                    <a href="#menu-toggle" class="menu-toggle">
-                        Clínica Cardio Pulmunar <span class="glyphicon glyphicon-menu-hamburger">
-                    </a>
-                </li>
-                <li>
-                    <a ui-sref="registry({doctorID: doctorid})">{{doctorid}}Agregar Nuevo Registro</a>
-                </li>
-                <li>
-                    <a ui-sref="appointments({doctorID: doctorid})">Ver Citas Programadas</a>
-                </li>
-                <li>
-                    <a ui-sref="login">Cerrar Sesión</a>
-                </li>
-            </ul>
-        </div>
+        <navbar></navbar>
         <!-- /#sidebar-wrapper -->
         <!-- Page Content -->
         <div id="page-content-wrapper">
