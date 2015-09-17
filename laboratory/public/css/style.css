@@ -3,6 +3,10 @@ body {
     background-repeat: repeat;
 }
 
+.panel-info>.panel-heading {
+    background-image: linear-gradient(to bottom, rebeccapurple 0, rebeccapurple 100%);
+}
+
 .container {
     width: 970px;
     background-color: #E9F1F9;
@@ -17,6 +21,10 @@ body {
     border-radius: 10px;
 }
 
+.panel-title {
+    color: white;
+}
+
 .navbar-default .navbar-brand {
     color: white;
     font-size: 23px;
@@ -27,7 +35,8 @@ body {
 }
 
 .container-fluid {
-    background-color: #F26101;
+    background-color: rebeccapurple;
+    
     height: 72px;
     padding-top: 10px;
 }
@@ -37,10 +46,18 @@ body {
     font-size: 15px;
 }
 
+.navbar-default .navbar-nav>li>a:hover {
+    color: #CCCCCC;
+}
+
 .navbar-default .navbar-nav>.open>a,
 .navbar-default .navbar-nav>.open>a:focus,
 .navbar-default .navbar-nav>.open>a:hover {
-    color: #304269;
+    color: white;
+}
+
+.navbar-default .navbar-brand:hover {
+    color: #CCCCCC;
 }
 
 .navbar-default .navbar-nav>.open {
@@ -48,7 +65,7 @@ body {
 }
 
 ul.dropdown-menu {
-    background-color: #FE6E0E;
+    background-color: rebeccapurple;
 }
 
 .dropdown-menu>li>a {
@@ -57,12 +74,12 @@ ul.dropdown-menu {
 
 .navbar-default .navbar-nav>.active>a,
 .navbar-default .navbar-nav>.open>a {
-    background-image: linear-gradient(to bottom, #D95701 0, #D95701 100%);
+    background-image: linear-gradient(to bottom, rebeccapurple 0, rebeccapurple 100%);
 }
 
 .dropdown-menu>li>a:focus,
 .dropdown-menu>li>a:hover {
-    background-image: linear-gradient(to bottom, #FE8D41 0, #FE8D41 100%);
+    background-image: linear-gradient(to bottom, #B299CC 0, #B299CC 100%);
 }
 
 .btn {

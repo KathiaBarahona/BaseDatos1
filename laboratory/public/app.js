@@ -21,9 +21,14 @@ angular.module('labApp', ['ui.router'])
                     templateUrl: 'views/assignExam.view.html',
                     controller: 'labCtrl'
                 })
+                .state('login',{
+                    url: '/login',
+                    templateUrl: 'views/login.view.html',
+                    controller: 'loginCtrl'
+                })
 
 
-            $urlRouterProvider.otherwise('bill');
+            $urlRouterProvider.otherwise('login');
         }
     ])
     .directive('navbar', function() {
@@ -46,12 +51,17 @@ angular.module('labApp', ['ui.router'])
                         var url = "#/assignExam/" + $stateParams.userid;
                         window.location.href = url;
                     }
+                    if(value == 3){
+                        window.location.href = '#/login';
+                    }
 
                 }
 
             }
         }
     })
+    .controller('loginCtrl', ['$scope', '$http', '$stateParams', function($scope, $http) {
+    }])
      .controller('billCtrl', ['$scope', '$http', '$stateParams', function($scope, $http, $stateParams) {
         $scope.userid= $stateParams.userid
         if ($scope.userid== '' || $scope.userid== 'undefined') {
