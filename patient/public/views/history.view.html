@@ -15,5 +15,16 @@
       </tr>
     </thead>
     <tbody>
+        <tr ng-repeat="registry in registries">
+            <td>{{registry.id_registro}}</td>
+            <td>{{registry.id_doctor}}</td>
+            <td>{{registry.diagnostico}}</td>
+            <td><a>Ver Síntomas</a></td>
+            <td>{{registry.tipo}}</td>
+            <td>{{registry.motivo}}</td>
+            <td><a>Ver Medicamentos</a></td>
+            <td><a ng-click='verFacturas(registry.id_registro)'>Ver Facturas</a></td>
+            <td><a>Ver Examenes</a></td>
+        </tr>
     </tbody>
   </table>
