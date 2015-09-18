@@ -20,7 +20,14 @@ body {
     border: solid #91BED4 1px;
     border-radius: 10px;
 }
-
+.warning{
+    color: red;
+    display: none;
+}
+.warning2{
+    color: red;
+    display: none;
+}
 .panel-title {
     color: white;
 }
@@ -117,4 +124,7 @@ ul.dropdown-menu {
 
 .modal-content {
     padding: 30px;
+}
+.navbar-nav{
+    display: none;
 }

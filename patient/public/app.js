@@ -3,7 +3,7 @@ angular.module('patientApp', ['ui-notification', 'ui.router'])
 
 .config(function(NotificationProvider) {
         NotificationProvider.setOptions({
-            delay: 1000,
+            delay: 1500,
             startTop: 20,
             startRight: 10,
             verticalSpacing: 20,
@@ -100,7 +100,7 @@ angular.module('patientApp', ['ui-notification', 'ui.router'])
         };
 
     }])
-    .controller('historyCtrl', ['$scope', '$http', '$stateParams', function($scope, $http, $stateParams) {
+    .controller('historyCtrl', ['$scope', '$http', '$stateParams',function($scope, $http, $stateParams) {
         $scope.patientid = $stateParams.patientID
         if ($scope.patientid === '' || $scope.patientid === 'undefined') {
             window.location.href = "#/login"
@@ -108,6 +108,9 @@ angular.module('patientApp', ['ui-notification', 'ui.router'])
             $('.navbar-right').show();
         }
         $scope.registries;
+        $scope.symptoms;
+        $scope.medicines;
+        $scope.exams;
         $http.post('/historial', {
             "id_paciente": $scope.patientid
         }).success(function(response) {
@@ -124,38 +127,75 @@ angular.module('patientApp', ['ui-notification', 'ui.router'])
             $http.post('/examenes', {
                 "id_registro": value
             }).success(function(response) {
-                console.log(response)
+                $scope.exams = response;
             });
         }
-        $scope.verEnfermedades = function(value) {
-            $http.post('/enfermedades', {
-                "id_registro": value
-            }).success(function(response) {
-                console.log(response)
-            });
-        }
+
         $scope.verMedicamentos = function(value) {
             $http.post('/medicamentos', {
                 "id_registro": value
             }).success(function(response) {
-                console.log(response)
+                $scope.medicines = response;
             });
         }
         $scope.verSintomas = function(value) {
             $http.post('/sintomas', {
                 "id_registro": value
             }).success(function(response) {
-                console.log(response)
+                $scope.symptoms = response;
             });
         }
 
     }])
-    .controller('profileCtrl', ['$scope', '$http', '$stateParams', function($scope, $http, $stateParams) {
-        $scope.patientid = $stateParams.patientID
+    .controller('profileCtrl', ['$scope', '$http', '$stateParams','Notification' , function($scope, $http, $stateParams,Notification) {
+        $scope.patientid = $stateParams.patientID;
+        $scope.perfil;
+        $scope.telephones;
+        $scope.diseases;
+        $scope.telefono;
+        $scope.enfermedad;
         if ($scope.patientid == '' || $scope.patientid == 'undefined') {
             window.location.href = "#/login"
         } else {
             $('.navbar-right').show();
+        }
+
+        $http.post('/enfermedades', {
+            'id_paciente': $scope.patientid
+        }).success(function(response) {
+            $scope.diseases= response;
+            console.log(response)
+        });
+        $http.post('/telefonos', {
+            'id_paciente': $scope.patientid
+        }).success(function(response) {
+            $scope.telephones = response;
+        });
+
+        $scope.addEnfermedad = function() {
+            $http.post('/enfermedad', {
+                "id_paciente": $scope.patientid,
+                "enfermedad": $scope.enfermedad
+            }).success(function(response) {
+                 Notification.success('La enfermedad fue agregada exitosamente');
+                var element = '<li>'+ $scope.enfermedad +'</li>';
+                $('#diseaselist').append($(element))
+            }).error(function(response){
+                 Notification.error('Hubo un error al agregar, el limite de caracteres es 20');
+            })
+        }
+        $scope.addTelefono = function() {
+            $http.post('/telefono', {
+                "id_paciente": $scope.patientid,
+                "Telefono": $scope.telefono
+            }).success(function(response) {
+                Notification.success('El teléfono fue agregado exitosamente');
+                var element = '<li>'+ $scope.telefono +'</li>';
+                $('#telephonelist').append($(element))
+               
+            }).error(function(response){
+                Notification.error('Hubo un error al agregar, el limite de caracteres es 8');
+            })
         }
 
     }])

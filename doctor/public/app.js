@@ -56,12 +56,16 @@ angular.module('doctorApp', ['ui.router'])
         $scope.doctorId = $stateParams.doctorID
         if ($scope.doctorId == '' || $scope.doctorId == 'undefined') {
             window.location.href = "#/login"
+        }else{
+            $('#sidebar-wrapper').show();
         }
     }])
     .controller('appointmentsCtrl', ['$scope', '$http', '$stateParams', function($scope, $http, $stateParams) {
         $scope.doctorId = $stateParams.doctorID
         if ($scope.doctorId == '' || $scope.doctorId == 'undefined') {
             window.location.href = "#/login"
+        }else{
+            $('#sidebar-wrapper').show();
         }
     }])
     .controller('loginCtrl', ['$scope', '$http', '$stateParams', function($scope, $http, $stateParams) {

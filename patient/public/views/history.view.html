@@ -1,30 +1,140 @@
-
- <h1 class= 'header historialh1'><u>Historial Médico</u></h1>
-<table class="table table-hover">
-    <thead>
-      <tr>
-        <th>No. Registro</th>
-        <th>Doctor</th>
-        <th>Diagnóstico</th>
-        <th>Síntomas</th>
-        <th>Tipo</th>
-        <th>Motivo</th>
-        <th>Medicamentos</th>
-        <th>No.Factura de Cuenta</th>
-        <th>No. Factura de Examenes</th>
-      </tr>
-    </thead>
-    <tbody>
-        <tr ng-repeat="registry in registries">
-            <td>{{registry.id_registro}}</td>
-            <td>{{registry.id_doctor}}</td>
-            <td>{{registry.diagnostico}}</td>
-            <td><a>Ver Síntomas</a></td>
-            <td>{{registry.tipo}}</td>
-            <td>{{registry.motivo}}</td>
-            <td><a>Ver Medicamentos</a></td>
-            <td><a ng-click='verFacturas(registry.id_registro)'>Ver Facturas</a></td>
-            <td><a>Ver Examenes</a></td>
-        </tr>
-    </tbody>
-  </table>
+<div class='maincontainer'>
+    <h1 class='header historialh1'><u>Historial Médico</u></h1>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>No. Registro</th>
+                <th>Doctor</th>
+                <th>Diagnóstico</th>
+                <th>Síntomas</th>
+                <th>Tipo</th>
+                <th>Motivo</th>
+                <th>Medicamentos</th>
+                <th>Cuentas</th>
+                <th>Examenes</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="registry in registries">
+                <td>{{registry.id_registro}}</td>
+                <td>{{registry.id_doctor}}</td>
+                <td>{{registry.diagnostico}}</td>
+                <td><a data-toggle="modal" data-target="#sintomas" ng-click='verSintomas(registry.id_registro)'>Ver Síntomas</a></td>
+                <td>{{registry.tipo}}</td>
+                <td>{{registry.motivo}}</td>
+                <td><a ng-click='verMedicamentos(registry.id_registro)' data-toggle="modal" data-target="#medicamentos">Ver Medicamentos</a></td>
+                <td><a data-toggle="modal" data-target="#cuenta" ng-click='verFacturas(registry.id_registro)'>Ver Cuenta</a></td>
+                <td><a data-toggle="modal" data-target="#examenes" ng-click='verExamenes(registry.id_registro)'>Ver Examenes</a></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<div id="sintomas" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Sintomas</h4>
+            </div>
+            <div class="modal-body">
+                <ul class="list-group">
+                    <li ng-repeat='symptom in symptoms' class="list-group-item">{{symptom.sintoma}}</li>
+                </ul>
+            </div>
+            <button type="button" class="btn btn-primary" data-dismiss="modal">Cerrar</button>
+        </div>
+    </div>
+</div>
+<div id="medicamentos" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Medicamentos</h4>
+            </div>
+            <div class="modal-body">
+                <ul class="list-group">
+                    <li ng-repeat='medicine in medicines' class="list-group-item">{{medicine.medicamento}}</li>
+                </ul>
+            </div>
+            <button type="button" class="btn btn-primary" data-dismiss="modal">Cerrar</button>
+        </div>
+    </div>
+</div>
+<div id="examenes" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Examenes</h4>
+            </div>
+            <div class="modal-body">
+                <table class='table table-bordered'>
+                    <thead>
+                        <tr>
+                            <th>Código</th>
+                            <th>Tipo</th>
+                            <th>Costos</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat='exam in exams'>
+                            <td>{{exam.id_examen}}</td>
+                            <td>{{exam.tipo}}</td>
+                            <td>{{exam.costo}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <button type="button" class="btn btn-primary" data-dismiss="modal">Cerrar</button>
+        </div>
+    </div>
+</div>
+<div id="cuenta" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Factura</h4>
+            </div>
+            <div class="modal-body">
+                <label>No.Factura:</label>
+                <br>
+                <br>
+                <label>No.Paciente:</label>
+                <br>
+                <br>
+                <label>Nombre:</label>
+                <br>
+                <br>
+                <label>Doctor:</label>
+                <br>
+                <br>
+                <label>Examenes:</label>
+                <br>
+                <br>
+                <table class='table table-bordered'>
+                    <thead>
+                        <tr>
+                            <th>Tipo</th>
+                            <th>Costos</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+                <label>Honorarios:</label>
+                <br>
+                <br>
+                <label>Total a Pagar:</label>
+                <br>
+                <br>
+            </div>
+            <button type="button" class="btn btn-primary" data-dismiss="modal">Cerrar</button>
+        </div>
+    </div>
+</div>

@@ -34,18 +34,14 @@
              res.status(400).end();
          } else {
              var request = connection.request();
-             request.query('select id_paciente,password from Pacientes', function(err, recordset) {
+             request.query("select id_paciente,password from Pacientes where id_paciente='" + req.body.id_paciente + "' and password='" + req.body.password + "'", function(err, recordset) {
                  if (err) {
                      console.log("Error query");
                      res.status(400).end();
                  } else {
-                     recordset.forEach(function(entry) {
-                         if (entry.id_paciente == req.body.id_paciente && entry.password == req.body.password) {
-                             autenticado = true;
-                             current_patient = entry.id_paciente;
-                         }
-                     });
-                     if (autenticado) {
+                     
+
+                     if (recordset.length != 0) {
                          //res.redirect('/registry');
                          res.send("existe");
                          res.status(200).end();
@@ -55,7 +51,6 @@
                          res.status(401).end();
                      }
                  }
-
              });
          }
      });
@@ -136,7 +131,6 @@
              request1.query("insert into Citas values('" + req.body.id_doctor + "','" + req.body.id_paciente + "','" + req.body.fecha + "','" + req.body.motivo + "')", function(err, recordset) {
                  if (err) {
                      console.log("Error query");
-                     console.log(err)
                      res.status(400).end();
                  } else {
                      res.status(200).end();
@@ -265,8 +259,9 @@
              res.status(400).end();
          } else {
              var request = connection.request();
-             request.query("insert into Paciente_Telefonos values('" + current_patient + "','" + req.body.telefono + "')", function(err, recordset) {
+             request.query("insert into Paciente_Telefonos values('" + req.body.id_paciente + "','" + req.body.Telefono + "')", function(err, recordset) {
                  if (err) {
+                     console.log(err)
                      console.log("Error query");
                      res.status(400).end();
                  } else {
@@ -285,7 +280,7 @@
              res.status(400).end();
          } else {
              var request = connection.request();
-             request.query("insert into Paciente_Enfermedades values('" + current_patient + "','" + req.body.enfermedad + "')", function(err, recordset) {
+             request.query("insert into Paciente_Enfermedades values('" + req.body.id_paciente + "','" + req.body.enfermedad + "')", function(err, recordset) {
                  if (err) {
                      console.log("Error query");
                      res.status(400).end();
@@ -305,7 +300,7 @@
              res.status(400).end();
          } else {
              var request = connection.request();
-             request.query("select telefono  from Paciente_Telefonos where id_paciente='" + current_patient + "'", function(err, recordset) {
+             request.query("select telefono  from Paciente_Telefonos where id_paciente='" + req.body.id_paciente + "'", function(err, recordset) {
                  if (err) {
                      console.log("Error query");
                      res.status(400).end();
@@ -327,7 +322,7 @@
              res.status(400).end();
          } else {
              var request = connection.request();
-             request.query("select enfermedad from Paciente_Enfermedades where id_paciente='" + current_patient + "'", function(err, recordset) {
+             request.query("select enfermedad from Paciente_Enfermedades where id_paciente='" + req.body.id_paciente + "'", function(err, recordset) {
                  if (err) {
                      console.log("Error query");
                      res.status(400).end();

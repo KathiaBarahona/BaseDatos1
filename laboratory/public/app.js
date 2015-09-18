@@ -21,7 +21,7 @@ angular.module('labApp', ['ui.router'])
                     templateUrl: 'views/assignExam.view.html',
                     controller: 'labCtrl'
                 })
-                .state('login',{
+                .state('login', {
                     url: '/login',
                     templateUrl: 'views/login.view.html',
                     controller: 'loginCtrl'
@@ -51,7 +51,7 @@ angular.module('labApp', ['ui.router'])
                         var url = "#/assignExam/" + $stateParams.userid;
                         window.location.href = url;
                     }
-                    if(value == 3){
+                    if (value == 3) {
                         window.location.href = '#/login';
                     }
 
@@ -61,17 +61,82 @@ angular.module('labApp', ['ui.router'])
         }
     })
     .controller('loginCtrl', ['$scope', '$http', '$stateParams', function($scope, $http) {
-    }])
-     .controller('billCtrl', ['$scope', '$http', '$stateParams', function($scope, $http, $stateParams) {
-        $scope.userid= $stateParams.userid
-        if ($scope.userid== '' || $scope.userid== 'undefined') {
-            //window.location.href = "#/login"
+        $scope.user;
+        $scope.login = function() {
+            $scope.user.id_usuario = 'U' + $scope.user.id_usuario;
+            $http.post('/login', {
+                "id_usuario": $scope.user.id_usuario,
+                "password": $scope.user.password
+            }).success(function(response) {
+                window.location.href = "#/bill/" + $scope.user.id_usuario;
+
+            }).error(function(response) {
+                $('.warning2').show();
+
+            })
+
+        }
+        $scope.valid = function() {
+            var bool = true;
+            if ($scope.user.password == undefined) {
+                $('.warning').show();
+                bool = false;
+                $('.pass1').css('border-color', 'red');
+
+            } else {
+                $('.pass1').css('border-color', 'green');
+            }
+            if ($scope.user.password2 == undefined) {
+                $('.warning').show();
+                bool = false;
+                $('.pass2').css('border-color', 'red');
+
+            } else {
+                $('.pass2').css('border-color', 'green');
+            }
+            if ($scope.user.password != $scope.user.password2) {
+                $('.warning').show();
+                bool = false;
+                $('.pass2').css('border-color', 'red');
+                $('.pass1').css('border-color', 'red');
+            }
+            if ($scope.user.id_usuario == undefined) {
+                $('.warning').show();
+                bool = false;
+                $('.userid').css('border-color', 'red');
+            } else {
+                $('.userid').css('border-color', 'green');
+            }
+            return bool;
+
+        }
+        $scope.registry = function() {
+            if ($scope.valid()) {
+                 $scope.user.id_usuario = 'U' + $scope.user.id_usuario;
+                $http.post('/registry', {
+                    "id_usuario": $scope.user.id_usuario,
+                    "password": $scope.user.password
+                }).success(function(response) {
+                    window.location.href = "#/bill/" + $scope.user.id_usuario;
+                    //$('.navbar-right').show();
+                });
+            }
+
         }
     }])
-     .controller('labCtrl', ['$scope', '$http', '$stateParams', function($scope, $http, $stateParams) {
-        $scope.userid= $stateParams.userid
-        if ($scope.userid== '' || $scope.userid== 'undefined') {
-            //window.location.href = "#/login"
+    .controller('billCtrl', ['$scope', '$http', '$stateParams', function($scope, $http, $stateParams) {
+        $scope.userid = $stateParams.userid
+        if ($scope.userid == '' || $scope.userid == 'undefined') {
+            window.location.href = "#/login"
+        } else {
+            $('.navbar-nav').show();
         }
     }])
-    
+    .controller('labCtrl', ['$scope', '$http', '$stateParams', function($scope, $http, $stateParams) {
+        $scope.userid = $stateParams.userid
+        if ($scope.userid == '' || $scope.userid == 'undefined') {
+            window.location.href = "#/login"
+        } else {
+            $('.navbar-nav').show();
+        }
+    }])
