@@ -111,16 +111,20 @@ angular.module('patientApp', ['ui-notification', 'ui.router'])
         $scope.symptoms;
         $scope.medicines;
         $scope.exams;
+        $scope.bills;
         $http.post('/historial', {
             "id_paciente": $scope.patientid
         }).success(function(response) {
             $scope.registries = response;
+
         });
         $scope.verFacturas = function(value) {
             $http.post('/cuenta', {
                 "id_registro": value
             }).success(function(response) {
-                console.log(response)
+                $scope.bills = response;
+                if($scope.exams == undefined)
+                    $scope.verExamenes(value);
             });
         }
         $scope.verExamenes = function(value) {
@@ -164,13 +168,18 @@ angular.module('patientApp', ['ui-notification', 'ui.router'])
             'id_paciente': $scope.patientid
         }).success(function(response) {
             $scope.diseases= response;
-            console.log(response)
         });
         $http.post('/telefonos', {
             'id_paciente': $scope.patientid
         }).success(function(response) {
             $scope.telephones = response;
         });
+        $http.post('/perfil',{
+            'id_paciente': $scope.patientid
+        }).success(function(response){
+            $scope.perfil = response[0];
+            //console.log(response)
+        })
 
         $scope.addEnfermedad = function() {
             $http.post('/enfermedad', {

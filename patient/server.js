@@ -39,7 +39,7 @@
                      console.log("Error query");
                      res.status(400).end();
                  } else {
-                     
+
 
                      if (recordset.length != 0) {
                          //res.redirect('/registry');
@@ -141,15 +141,19 @@
  });
 
  app.post('/historial', function(req, res) {
-     console.log(req)
      var connection = new sql.Connection(config, function(err) {
          if (err) {
              console.log("Error conexion");
              res.status(400).end();
          } else {
              var request = connection.request();
-             request.query("select * from Registros where id_paciente='" + req.body.id_paciente + "'", function(err, recordset) {
+             var query = "select Registros.*,Doctores.nombres,Doctores.apellidos from Registros "+
+             "inner join Pacientes on Pacientes.id_paciente = Registros.id_paciente "+
+             "inner join Doctores on Doctores.id_doctor = Registros.id_doctor "+
+             "where Registros.id_paciente = '"+req.body.id_paciente+"'";
+             request.query(query, function(err, recordset) {
                  if (err) {
+                    console.log(err)
                      console.log("Error query");
                      res.status(400).end();
                  } else {
@@ -215,9 +219,14 @@
              res.status(400).end();
          } else {
              var request = connection.request();
-             request.query("select * from Cuentas where id_registro='" + req.body.id_registro + "'", function(err, recordset) {
+             var query = "select Cuentas.*,Pacientes.nombres AS nombrePac,Pacientes.apellidos AS apellidoPac,Doctores.honorarios,Doctores.nombres AS nombreDoc,Doctores.apellidos AS apellidoDoc from Cuentas "+
+             "inner join Pacientes on Pacientes.id_paciente = Cuentas.id_paciente "+
+             "inner join Doctores on Doctores.id_doctor = Cuentas.id_doctor "+
+             "where Cuentas.id_registro = '" + req.body.id_registro + "'"
+             request.query(query, function(err, recordset) {
                  if (err) {
                      console.log("Error query");
+                     console.log(err)
                      res.status(400).end();
                  } else {
                      res.contentType('application/json');
@@ -323,6 +332,28 @@
          } else {
              var request = connection.request();
              request.query("select enfermedad from Paciente_Enfermedades where id_paciente='" + req.body.id_paciente + "'", function(err, recordset) {
+                 if (err) {
+                     console.log("Error query");
+                     res.status(400).end();
+                 } else {
+                     res.contentType('application/json');
+                     res.send(JSON.stringify(recordset));
+                     res.status(200).end();
+                 }
+
+             });
+         }
+     });
+ });
+
+ app.post('/perfil', function(req, res) {
+     var connection = new sql.Connection(config, function(err) {
+         if (err) {
+             console.log("Error conexion");
+             res.status(400).end();
+         } else {
+             var request = connection.request();
+             request.query("select * from Pacientes where id_paciente='" + req.body.id_paciente + "'", function(err, recordset) {
                  if (err) {
                      console.log("Error query");
                      res.status(400).end();

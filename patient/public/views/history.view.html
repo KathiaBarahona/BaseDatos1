@@ -17,7 +17,7 @@
         <tbody>
             <tr ng-repeat="registry in registries">
                 <td>{{registry.id_registro}}</td>
-                <td>{{registry.id_doctor}}</td>
+                <td>{{registry.nombres}} {{registry.apellidos}}</td>
                 <td>{{registry.diagnostico}}</td>
                 <td><a data-toggle="modal" data-target="#sintomas" ng-click='verSintomas(registry.id_registro)'>Ver Síntomas</a></td>
                 <td>{{registry.tipo}}</td>
@@ -101,20 +101,20 @@
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                 <h4 class="modal-title">Factura</h4>
             </div>
-            <div class="modal-body">
-                <label>No.Factura:</label>
+            <div class="modal-body" ng-repeat='bill in bills'>
+                <label>No.Factura: </label> {{bill.num_factura}}
                 <br>
                 <br>
-                <label>No.Paciente:</label>
+                <label>No.Paciente: </label> {{bill.id_paciente}}
                 <br>
                 <br>
-                <label>Nombre:</label>
+                <label>Nombre: </label>  {{bill.nombrePac}} {{bill.apellidoPac}}
                 <br>
                 <br>
-                <label>Doctor:</label>
+                <label>Doctor: </label>  {{bill.nombreDoc}} {{bill.apellidoDoc}}
                 <br>
                 <br>
-                <label>Examenes:</label>
+                <label>Examenes: </label>
                 <br>
                 <br>
                 <table class='table table-bordered'>
@@ -125,12 +125,16 @@
                         </tr>
                     </thead>
                     <tbody>
+                         <tr ng-repeat='exam in exams'>
+                            <td>{{exam.tipo}}</td>
+                            <td>{{exam.costo}}</td>
+                        </tr>
                     </tbody>
                 </table>
-                <label>Honorarios:</label>
+                <label>Honorarios: </label>{{bill.honorarios}}
                 <br>
                 <br>
-                <label>Total a Pagar:</label>
+                <label>Total a Pagar: </label>
                 <br>
                 <br>
             </div>
