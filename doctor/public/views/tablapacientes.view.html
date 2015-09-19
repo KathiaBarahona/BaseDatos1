@@ -1,0 +1,12 @@
+<h1 class='header'><u>Pacientes</u></h1>
+<table class="table table-hover">
+	<thead>
+		<tr><td>No.Identidad</td><td>Nombre</td></tr>
+	</thead>
+	<tbody>
+		<tr ng-repeat="patient in patients">
+			<td><a>{{patient.id_paciente}}</a></td>
+			<td>{{patient.nombre_completo}}</td>
+		</tr>
+	</tbody>
+</table>

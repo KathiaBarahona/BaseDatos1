@@ -2,13 +2,13 @@
     <h1>Generar Factura</h1>
     <div class="form-group">
         <label for="email">Paciente:</label>
-        <select id='pacientesel' class="form-control"></select>
+        <select id='pacientesel' class="form-control" ></select>
     </div>
     <div class="form-group">
         <label for="email">No. Registro:</label>
         <select id='registrosel' class="form-control"></select>
     </div>
-    <button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Generar</button>
+    <button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#myModal" ng-click='generateBill()'>Generar</button>
 </div>
 <div id="myModal" class="modal fade" role="dialog">
     <div class="modal-dialog">
@@ -19,16 +19,21 @@
                 <h4 class="modal-title">Factura</h4>
             </div>
             <div class="modal-body">
-                <label>No.Factura:</label>
-                <br><br>
-                <label>No.Paciente:</label>
-                <br><br>
-                <label>Nombre:</label>
-                <br><br>
-                <label>Doctor:</label>
-                <br><br>
-                <label>Examenes:</label>
-                <br><br>
+                <label>No.Factura: </label> {{bill.num_factura}}
+                <br>
+                <br>
+                <label>No.Paciente: </label> {{bill.id_paciente}}
+                <br>
+                <br>
+                <label>Nombre: </label> {{bill.nombrePac}} {{bill.apellidoPac}}
+                <br>
+                <br>
+                <label>Doctor: </label> {{bill.nombreDoc}} {{bill.apellidoDoc}}
+                <br>
+                <br>
+                <label>Examenes: </label>
+                <br>
+                <br>
                 <table class='table table-bordered'>
                     <thead>
                         <tr>
@@ -37,12 +42,18 @@
                         </tr>
                     </thead>
                     <tbody>
+                        <tr ng-repeat='exam in exams'>
+                            <td>{{exam.tipo}}</td>
+                            <td>L. {{exam.costo}}.00</td>
+                        </tr>
                     </tbody>
                 </table>
-                <label>Honorarios:</label>
-                <br><br>
-                <label>Total a Pagar:</label>
-                <br><br>
+                <label>Honorarios: </label>L.{{bill.honorarios}}.00
+                <br>
+                <br>
+                <label>Total a Pagar: </label>L.{{total}}.00
+                <br>
+                <br>
             </div>
             <button type="button" class="btn btn-primary" data-dismiss="modal">Cerrar</button>
         </div>

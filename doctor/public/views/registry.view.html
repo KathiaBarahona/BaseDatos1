@@ -2,7 +2,7 @@
 <form class='registry'>
     <div class='form-group'>
         <label for='inputformotive'>Paciente:</label>
-        <select class="form-control" id="sel1"></select>
+        <select class="form-control" id="sel1" ng-model='registry.id_paciente'></select>
     </div>
     <div class='form-group'>
         <label for='inputfordocto'>Sintomas:</label>
@@ -14,7 +14,12 @@
     <div class='form-group'>
         <label for='inputfordocto'>Diagnóstico:</label>
         <br>
-        <textarea class="form-control" rows="3"></textarea>
+        <textarea class="form-control" rows="3" ng-model='registry.diagnostico'></textarea>
+    </div>
+     <div class='form-group'>
+        <label for='inputfordocto'>Motivo:</label>
+        <br>
+        <textarea class="form-control" rows="3" ng-model='registry.motivo'></textarea>
     </div>
     <div class='form-group'>
         <ul class='medicamentos'></ul>
@@ -24,7 +29,7 @@
     <div class='form-group'>
         <label for='inputfordocto'>Tipo:</label>
         <br>
-        <select class="form-control" id="sel2">
+        <select class="form-control" id="sel2" ng-model='registry.tipo'>
             <option>Consulta</option>
             <option>Hospitalización</option>
         </select>

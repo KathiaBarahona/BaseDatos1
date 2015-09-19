@@ -8,5 +8,10 @@
         </tr>
     </thead>
     <tbody>
+    	<tr ng-repeat"appointment in appointments">
+    		<td>{{appointment.paciente_id}}</td>
+    		<td>{{appointment.nombre_completo}}</td>
+    		<td>{{appointment.motivo}}</td>
+    	</tr>
     </tbody>
 </table>

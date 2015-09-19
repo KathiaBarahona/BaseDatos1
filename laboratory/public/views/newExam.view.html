@@ -3,16 +3,16 @@
     <form role='form'>
         <div class="form-group">
             <label for="email">Código de Examen:</label>
-            <input type="text" class="form-control" id="idexam">
+            <input type="text" class="form-control" id="idexam" ng-model='exam.id_examen'>
         </div>
         <div class="form-group">
             <label for="email">Tipo de Examen:</label>
-            <input type="text" class="form-control" id="tipoexam">
+            <input type="text" class="form-control" id="tipoexam" ng-model='exam.tipo'>
         </div>
         <div class="form-group">
             <label for="email">Costo de Examen:</label>
-            <input type="number" class="form-control" id="tipoexam">
+            <input type="number" class="form-control" id="tipoexam" ng-model='exam.costo'>
         </div>
-        <button type="submit" class="btn btn-primary">Agregar</button>
+        <button type="submit" class="btn btn-primary" ng-click='addExam()'>Agregar</button>
     </form>
 </div>

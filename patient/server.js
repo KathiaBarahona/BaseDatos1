@@ -247,7 +247,7 @@
              res.status(400).end();
          } else {
              var request = connection.request();
-             request.query("select * from Examenes where id_examen=(select id_examen from Paciente_Examenes where id_registro = '" + req.body.id_registro + "')", function(err, recordset) {
+             request.query("select * from Examenes where id_examen in (select id_examen from Paciente_Examenes where id_registro = '" + req.body.id_registro + "')", function(err, recordset) {
                  if (err) {
                      console.log("Error query");
                      res.status(400).end();

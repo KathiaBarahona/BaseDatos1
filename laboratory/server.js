@@ -9,8 +9,8 @@
  app.use(express.static(__dirname + "/public"));
 
  var config = {
-     user: 'xavier_2696',
-     password: 'j8r74e3h',
+     user: 'sa',
+     password: 'jblazo123456',
      server: 'localhost',
      database: 'Hospital',
  }
@@ -125,10 +125,12 @@ app.post('/paciente_examen', function(req, res){
              console.log("Error conexion");
              res.status(400).end();
          } else {
+            console.log(req)
              var request = connection.request();
              request.query("insert into Paciente_Examenes(id_examen,id_paciente,id_registro) values('" + req.body.id_examen + "','" + req.body.id_paciente+ "','" + req.body.id_registro+ "')",
                  function(err, recordset) {
                      if (err) {
+                        console.log(err)
                          console.log("Error query 1");
                          res.status(400).end();
                      } else {
@@ -189,13 +191,15 @@ app.post('/cuenta', function(req, res) {
 
  app.post('/examenes', function(req, res) {
      var connection = new sql.Connection(config, function(err) {
+        console.log(req)
          if (err) {
              console.log("Error conexion");
              res.status(400).end();
          } else {
              var request = connection.request();
-             request.query("select * from Examenes where id_examen=(select id_examen from Paciente_Examenes where id_registro = '" + req.body.id_registro + "')", function(err, recordset) {
+             request.query("select * from Examenes where id_examen in (select id_examen from Paciente_Examenes where id_registro = '" + req.body.id_registro + "')", function(err, recordset) {
                  if (err) {
+                    console.log(err)
                      console.log("Error query");
                      res.status(400).end();
                  } else {
@@ -216,7 +220,7 @@ app.post('/cuenta', function(req, res) {
              res.status(400).end();
          } else {
              var request = connection.request();
-             request.query("select id_paciente,nombres,appellidos from Pacientes" , function(err, recordset) {
+             request.query("select id_paciente,nombres,apellidos from Pacientes" , function(err, recordset) {
                  if (err) {
                      console.log("Error query");
                      res.status(400).end();

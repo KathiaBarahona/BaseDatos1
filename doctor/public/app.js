@@ -85,7 +85,6 @@ angular.module('doctorApp', ['ui.router'])
                 }
 
             }).error(function(response){
-                console.log(response)
                 $('.warning2').show();
             })
 
