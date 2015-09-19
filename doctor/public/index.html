@@ -14,55 +14,30 @@
 <body ng-app='doctorApp'>
     <div id="wrapper">
         <!-- Sidebar -->
-        <div id="sidebar-wrapper">
-            <ul class="sidebar-nav">
-                <li class="sidebar-brand">
-                    <a href="#menu-toggle" class="menu-toggle">
-                        Clínica Cardio Pulmunar <span class="glyphicon glyphicon-menu-hamburger">
-                    </a>
-                </li>
-                <li>
-                    <a ui-sref="registry({doctorID: doctorid})">{{doctorid}}Agregar Nuevo Registro</a>
-                </li>
-                <li>
-                    <a ui-sref="appointments({doctorID: doctorid})">Ver Citas Programadas</a>
-                </li>
-                <li>
-                    <a ui-sref="login">Cerrar Sesión</a>
-                </li>
-            </ul>
-        </div>
+        <navbar></navbar>
         <!-- /#sidebar-wrapper -->
         <!-- Page Content -->
         <div id="page-content-wrapper">
             <div class='jumbotron'>
-                <a href="#menu-toggle" id='togglemenu' class="menu-toggle outmenu"><span class="glyphicon glyphicon-menu-hamburger togglemen"></a>
-            </div>
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <ui-view></ui-view>
-                    </div>
-                </div>
+                <a id='togglemenu' class="menu-toggle outmenu"><span class="glyphicon glyphicon-menu-hamburger togglemen"></a>
             </div>
         </div>
         <!-- /#page-content-wrapper -->
     </div>
+    <ui-view></ui-view>
     <!-- /#wrapper -->
     <!-- jQuery -->
-    <script src="js/jquery.js"></script>
-    <!-- Bootstrap Core JavaScript -->
-    <script src="js/bootstrap.min.js"></script>
     <!-- Menu Toggle Script -->
     <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
     <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
+    <script src='controllers/angular-ui-notification.min.js'></script>
+    <link rel="stylesheet" type="text/css" href="css/angular-ui-notification.min.css">
     <script src='angular-route.min.js'></script>
     <script src='angular-ui-router.min.js'></script>
     <script src='app.js'></script>
-    <script src='controllers/script.js'></script>
-    <script src='controllers/doctor.controller.js'></script>
+    <!--script src='controllers/script.js'></script-->
 </body>
 
 </html>

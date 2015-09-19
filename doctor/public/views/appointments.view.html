@@ -1,12 +1,19 @@
+<div class="container-fluid">
 <h1 class='header'><u>Citas Programadas</u></h1>
 <table class="table table-hover">
     <thead>
         <tr>
             <th>ID Paciente</th>
-            <th>Paciente</th>
             <th>Motivos</th>
+            <th>Fecha</th>
         </tr>
     </thead>
     <tbody>
+    	<tr ng-repeat="appointment in appointments">
+    		<td>{{appointment.id_paciente}}</td>
+    		<td>{{appointment.motivo}}</td>
+            <td>{{appointment.fecha}}</td>
+    	</tr>
     </tbody>
 </table>
+</div>

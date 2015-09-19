@@ -63,6 +63,9 @@
          width: 70%;
          opacity: 0.75;
      }
+     .navbar-right{
+        display: none;
+     }
      
      #bs-example-navbar-collapse-1 {
          position: relative;

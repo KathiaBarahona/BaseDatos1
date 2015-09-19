@@ -1,37 +1,90 @@
-<div class='appointcontainer'>
-    <h1 class= 'header'><u>Perfil</u></h1>
-    <form>
-        <div class='form-group'>
-            <label for='inputformotive' >Nombre:</label>
-            <br>
+<div class='maincontainer'>
+    <div class='appointcontainer'>
+        <h1 class='header'><u>Perfil</u></h1>
+        <form>
+            <div class='form-group'>
+                <label for='inputformotive'>Nombre:  {{perfil.nombres}} {{perfil.apellidos}}</label>
+                <br>
+            </div>
+            <div class='form-group'>
+                <label for='inputfordocto'>Direccion:  {{perfil.direccion}}</label>
+                <br>
+                <br>
+            </div>
+            <div class='form-group'>
+                <label for='inputfordocto'>Ocupacion:  {{perfil.ocupacion}}</label>
+                <br>
+                <br>
+            </div>
+            <div class='form-group'>
+                <label for='inputfordocto'>Email:  {{perfil.email}}</label>
+                <br>
+                <br>
+            </div>
+            <div class='form-group'>
+                <label for='inputfordocto'>Telefonos:</label>
+                <ul id='telephonelist'>
+                    <li ng-repeat='telephone in telephones'>{{telephone.telefono}}</li>
+                </ul>
+                <a data-toggle="modal" data-target="#telefonos">Agregar Teléfono</a>
+                <br>
+                <br>
+            </div>
+            <div class='form-group'>
+                <label for='inputfordocto'>Estado Marital:  {{perfil.estado_marital}}</label>
+                <br>
+                <br>
+            </div>
+            <div class='form-group'>
+                <label for='inputfordocto'>Sexo:  {{perfil.sexo}}</label>
+                <br>
+                <br>
+            </div>
+            <div class='form-group'>
+                <label for='inputfordocto'>Enfermedades:</label>
+                <ul id='diseaselist'>
+                    <li ng-repeat='disease in diseases'>{{disease.enfermedad}}</li>
+                </ul>
+                <a data-toggle="modal" data-target="#enfermedades">Agregar Enfermedad</a>
+                <br>
+                <br>
+            </div>
+        </form>
+    </div>
+</div>
+<div id="telefonos" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Agregar Teléfono</h4>
+            </div>
+            <div class="modal-body">
+                <label>Número:</label>
+                <br>
+                <br>
+                <input class='form-control' ng-model='telefono'></input>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click='addTelefono()'>Agregar</button>
+            </div>
         </div>
-        <div class='form-group'>
-            <label for='inputfordocto'>Direccion:</label><br>
-            <br>
+    </div>
+</div>
+<div id="enfermedades" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Agregar Enfermedad</h4>
+            </div>
+            <div class="modal-body">
+                <label>Enfermedad:</label>
+                <br>
+                <br>
+                <input class='form-control' ng-model='enfermedad'></input>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click='addEnfermedad()'>Agregar</button>
+            </div>
         </div>
-        <div class='form-group'>
-            <label for='inputfordocto'>Ocupacion:</label><br>
-            <br>
-        </div>
-         <div class='form-group'>
-            <label for='inputfordocto'>Email:</label><br>
-            <br>
-        </div>
-         <div class='form-group'>
-            <label for='inputfordocto'>Telefonos:</label><br>
-            <br>
-        </div>
-         <div class='form-group'>
-            <label for='inputfordocto'>Estado Marital:</label><br>
-            <br>
-        </div>
-         <div class='form-group'>
-            <label for='inputfordocto'>Sexo:</label><br>
-            <br>
-        </div>
-         <div class='form-group'>
-            <label for='inputfordocto'>Enfermedades:</label><br>
-            <br>
-        </div>
-    </form>
+    </div>
 </div>

@@ -1,20 +1,22 @@
-<div class='appointcontainer'>
-    <h1 class='header'><u>Reservar Cita</u></h1>
-    <form>
-        <div class='form-group'>
-            <label for='inputformotive'>Motivos:</label>
-            <textarea class="form-control" rows="3"></textarea>
-        </div>
-        <div class='form-group'>
-            <label for='inputfordocto'>Doctor:</label>
-            <br>
-            <select class="form-control" id="sel2"></select>
-        </div>
-        <div  id="sandbox-container">
-            <label for='inputfordocto'>Fecha:</label>
-            <br>
-            <input type="text" class="form-control">
-        </div>
-        <button class='btn btn-primary'>Reservar</button>
-    </form>
+<div class='maincontainer'>
+    <div class='appointcontainer'>
+        <h1 class='header'><u>Reservar Cita</u></h1>
+        <form>
+            <div class='form-group'>
+                <label for='inputformotive'>Motivos:</label>
+                <textarea class="form-control" rows="3" ng-model='cita.motivo'></textarea>
+            </div>
+            <div class='form-group'>
+                <label for='inputfordocto'>Doctor:</label>
+                <br>
+                <select class="form-control" id="seldoctores" ng-model='cita.id_doctor'></select>
+            </div>
+            <div id="sandbox-container">
+                <label for='inputfordocto'>Fecha:</label>
+                <br>
+                <input type="text" class="form-control" ng-model='cita.fecha'>
+            </div>
+            <button class='btn btn-primary' ng-click='reservarCita()'>Reservar</button>
+        </form>
+    </div>
 </div>

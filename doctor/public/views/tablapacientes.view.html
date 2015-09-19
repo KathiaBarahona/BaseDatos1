@@ -1,0 +1,17 @@
+<div class="container-fluid">
+    <h1 class='header'><u>Pacientes</u></h1>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <td>No.Identidad</td>
+                <td>Nombre</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="patient in patients">
+                <td><a ng-click='redirect(patient.id_paciente)'>{{patient.id_paciente}}</a></td>
+                <td>{{patient.nombres}} {{patient.apellidos}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

@@ -1,31 +1,64 @@
-<h1 class='header'><u>Agregar Registro</u></h1>
-<form class='registry'>
-    <div class='form-group'>
-        <label for='inputformotive'>Paciente:</label>
-        <select class="form-control" id="sel1"></select>
-    </div>
-    <div class='form-group'>
-        <label for='inputfordocto'>Sintomas:</label>
-        <br>
-        <textarea class="form-control" rows="3"></textarea>
-    </div>
-    <div class='form-group'>
-        <label for='inputfordocto'>Diagnóstico:</label>
-        <br>
-        <textarea class="form-control" rows="3"></textarea>
-    </div>
-    <div class='form-group'>
-        <label for='inputfordocto'>Medicamentos:</label>
-        <br>
-        <textarea class="form-control" rows="3"></textarea>
-    </div>
-    <div class='form-group'>
-        <label for='inputfordocto'>Tipo:</label>
-        <br>
-        <select class="form-control" id="sel2">
-            <option>Consulta</option>
-            <option>Hospitalización</option>
-        </select>
-    </div>
-    <button class='btn btn-primary'>Agregar</button>
-</form>
+<div class="container-fluid">
+    <h1 class='header'><u>Agregar Registro</u></h1>
+    <form class='registry'>
+        <div class='form-group'>
+            <label for='inputformotive'>Paciente:</label>
+            <select class="form-control" id="pacientesel" ng-model='registry.id_paciente'></select>
+        </div>
+        <div class='form-group'>
+            <label for='inputfordocto'>Sintomas:</label>
+            <br>
+            <ul class='sintomas'></ul>
+            <input class="form-control inputsintomas"></input>
+            <button onclick='appendsin()'>Agregar Sintoma</button>
+        </div>
+        <div class='form-group'>
+            <label for='inputfordocto'>Diagnóstico:</label>
+            <br>
+            <textarea class="form-control" rows="3" ng-model='registry.diagnostico'></textarea>
+        </div>
+        <div class='form-group'>
+            <label for='inputfordocto'>Motivo:</label>
+            <br>
+            <textarea class="form-control" rows="3" ng-model='registry.motivo'></textarea>
+        </div>
+        <div class='form-group'>
+            <ul class='medicamentos'></ul>
+            <input class="form-control inputmedicamentos"></input>
+            <button onclick='appendmed()'>Agregar Medicamento</button>
+        </div>
+        <div class='form-group'>
+            <label for='inputfordocto'>Tipo:</label>
+            <br>
+            <select class="form-control" id="sel2" ng-model='registry.tipo'>
+                <option value='c'>Consulta</option>
+                <option value='h'>Hospitalización</option>
+            </select>
+        </div>
+        <button class='btn btn-primary' ng-click='agregarRegistro()'>Agregar</button>
+    </form>
+</div>
+<script type="text/javascript">
+var appendmed = function() {
+    if ($('.inputmedicamentos').val() != '') {
+        var element = '<li>' + $('.inputmedicamentos').val() + "<a class = 'closebtn'><span class='glyphicon glyphicon-remove'></a>"
+        $('.medicamentos').append(element);
+        $('.inputmedicamentos').val('')
+        var length = $('.medicamentos').children().length;
+        $($($('.medicamentos').children()[length - 1]).children()).bind('click', function() {
+            $($(this).parent()).remove();
+        })
+    }
+}
+var appendsin = function() {
+    if ($('.inputsintomas').val() != '') {
+        var element = '<li>' + $('.inputsintomas').val() + "<a class = 'closebtn'><span class='glyphicon glyphicon-remove'></a>"
+        $('.sintomas').append(element);
+        $('.inputsintomas').val('')
+        var length = $('.sintomas').children().length;
+        $($($('.sintomas').children()[length - 1]).children()).bind('click', function() {
+            $($(this).parent()).remove();
+        })
+    }
+}
+</script>

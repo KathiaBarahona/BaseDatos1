@@ -1,0 +1,34 @@
+<div id="sidebar-wrapper">
+    <ul class="sidebar-nav">
+        <li class="sidebar-brand">
+            <a class="menu-toggle">
+                        Clínica Cardio Pulmunar <span class="glyphicon glyphicon-menu-hamburger"></span>
+                    </a>
+        </li>
+        <li>
+            <a ng-click='redirect(0)'>Agregar Nuevo Registro</a>
+        </li>
+        <li>
+            <a ng-click='redirect(1)'>Ver Citas Programadas</a>
+        </li>
+          <li>
+            <a ng-click='redirect(3)'>Ver Historiales</a>
+        </li>
+        <li>
+            <a ng-click='redirect(2)'>Cerrar Sesión</a>
+        </li>
+    </ul>
+</div>
+<script type="text/javascript">
+$('.menu-toggle').bind('click', function(e) {
+    e.preventDefault();
+    $("#wrapper").toggleClass("toggled");
+    $('.container-fluid').toggleClass('cftoggled')
+    if ($('#togglemenu').hasClass('outmenu')) {
+        $('#togglemenu').removeClass('outmenu');
+    } else {
+        $('#togglemenu').addClass('outmenu');
+    }
+
+})
+</script>

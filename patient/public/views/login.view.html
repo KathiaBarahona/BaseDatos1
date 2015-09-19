@@ -1,128 +1,129 @@
-<div class="container">
-    <div class="row">
-        <div class="span12">
-            <div class="" id="loginModal">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                    <h3>Iniciar Sesión</h3>
-                </div>
-                <div class="modal-body">
-                    <div class="well">
-                        <ul class="nav nav-tabs">
-                            <li class="active"><a href="#login" data-toggle="tab">Login</a></li>
-                            <li><a href="#create" data-toggle="tab">Crear Cuenta</a></li>
-                        </ul>
-                        <div id="myTabContent" class="tab-content">
-                            <div class="tab-pane active in" id="login">
-                                <form class="form-horizontal">
-                                    <fieldset>
-                                        <div id="legend">
-                                            <legend class="">Login</legend>
-                                        </div>
-                                        <div class="control-group">
-                                            <!-- Username -->
-                                            <label class="control-label" for="username">Id</label>
-                                            <div class="controls">
-                                                <input type="text" id="username" name="username" placeholder="" class="input-xlarge" ng-model="patient.id_paciente">
+<div class='maincontainer'>
+    <div class="container">
+        <div class="row">
+            <div class="span12">
+                <div class="" id="loginModal">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        <h3>Iniciar Sesión</h3>
+                    </div>
+                    <div class="modal-body">
+                        <div class="well">
+                            <ul class="nav nav-tabs">
+                                <li class="active"><a href="#login" data-toggle="tab">Login</a></li>
+                                <li><a href="#create" data-toggle="tab">Crear Cuenta</a></li>
+                            </ul>
+                            <div id="myTabContent" class="tab-content">
+                                <div class="tab-pane active in" id="login">
+                                    <form class="form-horizontal">
+                                        <fieldset>
+                                            <div id="legend">
+                                                <legend class="">Login</legend>
                                             </div>
-                                        </div>
-                                        <div class="control-group">
-                                            <!-- Password-->
-                                            <label class="control-label" for="password">Contraseña</label>
-                                            <div class="controls">
-                                                <input type="password" id="password" name="password" placeholder="" class="input-xlarge" ng-model='patient.password'>
+                                            <div class="control-group">
+                                                <!-- Username -->
+                                                <label class="control-label" for="username">Id</label>
+                                                <div class="controls">
+                                                    <input type="text" id="username" name="username" placeholder="" class="input-xlarge" ng-model="patient.id_paciente">
+                                                </div>
                                             </div>
-                                            <br>
-                                            <label class='warning2'>Usario no encontrado o error en la contraseña</label>
-                                        </div>
-                                        <div class="control-group">
-
-                                            <!-- Button -->
-                                            <div class="controls">
-                                                <button class="btn btn-primary" ng-click='login()'>Login</button>
+                                            <div class="control-group">
+                                                <!-- Password-->
+                                                <label class="control-label" for="password">Contraseña</label>
+                                                <div class="controls">
+                                                    <input type="password" id="password" name="password" placeholder="" class="input-xlarge" ng-model='patient.password'>
+                                                </div>
+                                                <br>
+                                                <label class='warning2'>Usario no encontrado o error en la contraseña</label>
                                             </div>
+                                            <div class="control-group">
+                                                <!-- Button -->
+                                                <div class="controls">
+                                                    <button class="btn btn-primary" ng-click='login()'>Login</button>
+                                                </div>
+                                            </div>
+                                        </fieldset>
+                                    </form>
+                                </div>
+                                <div class="tab-pane fade" id="create">
+                                    <form id="tab">
+                                        <br>
+                                        <label>No. Identidad</label>
+                                        <br>
+                                        <input type="text" value="" class="form-control idpatient" ng-model='patient.id_paciente'>
+                                        <br>
+                                        <label>Nombres</label>
+                                        <br>
+                                        <input type="text" value="" class="form-control namepatient" ng-model='patient.nombres'>
+                                        <br>
+                                        <label>Apellidos</label>
+                                        <br>
+                                        <input type="text" value="" class="form-control lastnamepatient" ng-model='patient.apellidos'>
+                                        <br>
+                                        <label>Tipo de Sangre</label>
+                                        <br>
+                                        <select class="form-control bloodtype" id="sel2" ng-model='patient.tipo_sangre'>
+                                            <option>O-</option>
+                                            <option>O+</option>
+                                            <option>A-</option>
+                                            <option>A+</option>
+                                            <option>B-</option>
+                                            <option>B+</option>
+                                            <option>AB-</option>
+                                            <option>AB+</option>
+                                        </select>
+                                        <br>
+                                        <label>Sexo</label>
+                                        <br>
+                                        <select class="form-control sexpatient" id="sel2" ng-model='patient.sexo'>
+                                            <option>F</option>
+                                            <option>M</option>
+                                        </select>
+                                        <br>
+                                        <label>Fecha de Nacimiento</label>
+                                        <br>
+                                        <div id="sandbox-container">
+                                            <input type="text datepatient" class="form-control" ng-model='patient.fecha_nac'>
                                         </div>
-                                    </fieldset>
-                                </form>
-                            </div>
-                            <div class="tab-pane fade" id="create">
-                                <form id="tab">
-                                    <br>
-                                    <label>No. Identidad</label>
-                                    <br>
-                                    <input type="text" value="" class="form-control idpatient" ng-model='patient.id_paciente'>
-                                    <br>
-                                    <label>Nombres</label>
-                                    <br>
-                                    <input type="text" value="" class="form-control namepatient" ng-model='patient.nombres'>
-                                    <br>
-                                    <label>Apellidos</label>
-                                    <br>
-                                    <input type="text" value="" class="form-control lastnamepatient" ng-model='patient.apellidos'>
-                                    <br>
-                                    <label>Tipo de Sangre</label>
-                                    <br>
-                                    <select class="form-control bloodtype" id="sel2" ng-model='patient.tipo_sangre'>
-                                        <option>O-</option>
-                                        <option>O+</option>
-                                        <option>A-</option>
-                                        <option>A+</option>
-                                        <option>B-</option>
-                                        <option>B+</option>
-                                        <option>AB-</option>
-                                        <option>AB+</option>
-                                    </select>
-                                    <br>
-                                    <label>Sexo</label>
-                                    <br>
-                                    <select class="form-control sexpatient" id="sel2" ng-model='patient.sexo'>
-                                        <option>F</option>
-                                        <option>M</option>
-                                    </select>
-                                    <br>
-                                    <label>Fecha de Nacimiento</label>
-                                    <br>
-                                    <div id="sandbox-container">
-                                        <input type="text datepatient" class="form-control" ng-model='patient.fecha_nac'>
-                                    </div>
-                                    <br>
-                                    <label>Estado Marital</label>
-                                    <br>
-                                    <select class="form-control statepatient" id="sel2" ng-model='patient.estado_marital'>
-                                        <option>S</option>
-                                        <option>C</option>
-                                        <option>V</option>
-                                    </select>
-                                    <br>
-                                    <label>Ocupación</label>
-                                    <br>
-                                    <input type="text" value="" class="form-control jobpatient" ng-model='patient.ocupacion'>
-                                    <br>
-                                    <label>Dirección</label>
-                                    <br>
-                                    <textarea class="form-control adresspatient" rows="3" ng-model='patient.direccion'></textarea>
-                                    <br>
-                                    <label>Contacto de Emergencia</label>
-                                    <br>
-                                    <input type="text" value="" class="form-control contactpatient" ng-model='patient.contact_emer'>
-                                    <br>
-                                    <label>Email</label>
-                                    <br>
-                                    <input type="email" value="" class="form-control emailpatient" ng-model='patient.email'>
-                                    <br>
-                                    <label>Contraseña</label>
-                                    <br>
-                                    <input type="password" value="" class="form-control passwordpatient" ng-model='patient.password'>
-                                    <br>
-                                    <label>Confirmar Contraseña</label>
-                                    <br>
-                                    <input type="password" value="" class="form-control password2patient" ng-model='patient.password2'>
-                                    <br>
-                                    <label class='warning'>No se ha podido registrar, asegurece que las contraseñas concuerden y ningun campo este vacío</label>
-                                    <div>
-                                        <button class="btn btn-primary" ng-click='registry()'>Registrarse</button>
-                                    </div>
-                                </form>
+                                        <br>
+                                        <label>Estado Marital</label>
+                                        <br>
+                                        <select class="form-control statepatient" id="sel2" ng-model='patient.estado_marital'>
+                                            <option>S</option>
+                                            <option>C</option>
+                                            <option>V</option>
+                                        </select>
+                                        <br>
+                                        <label>Ocupación</label>
+                                        <br>
+                                        <input type="text" value="" class="form-control jobpatient" ng-model='patient.ocupacion'>
+                                        <br>
+                                        <label>Dirección</label>
+                                        <br>
+                                        <textarea class="form-control adresspatient" rows="3" ng-model='patient.direccion'></textarea>
+                                        <br>
+                                        <label>Contacto de Emergencia</label>
+                                        <br>
+                                        <input type="text" value="" class="form-control contactpatient" ng-model='patient.contact_emer'>
+                                        <br>
+                                        <label>Email</label>
+                                        <br>
+                                        <input type="email" value="" class="form-control emailpatient" ng-model='patient.email'>
+                                        <br>
+                                        <label>Contraseña</label>
+                                        <br>
+                                        <input type="password" value="" class="form-control passwordpatient" ng-model='patient.password'>
+                                        <br>
+                                        <label>Confirmar Contraseña</label>
+                                        <br>
+                                        <input type="password" value="" class="form-control password2patient" ng-model='patient.password2'>
+                                        <br>
+                                        <label class='warning'>No se ha podido registrar, asegurece que las contraseñas concuerden y ningun campo este vacío</label>
+                                        <div>
+                                            <button class="btn btn-primary" ng-click='registry()'>Registrarse</button>
+                                        </div>
+                                    </form>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -130,3 +131,4 @@
             </div>
         </div>
     </div>
+</div>
