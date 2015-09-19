@@ -131,6 +131,9 @@ angular.module('patientApp', ['ui-notification', 'ui.router'])
                 
             });
         }
+        $scope.emptyExams = function(){
+            $scope.exams = undefined;
+        }
         $scope.verExamenes = function(value) {
             $http.post('/examenes', {
                 "id_registro": value

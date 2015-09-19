@@ -116,7 +116,9 @@ angular.module('doctorApp', ['ui-notification', 'ui.router'])
                 $scope.total += $scope.bills[0].honorarios;
             });
         }
-
+        $scope.emptyExams = function(){
+            $scope.exams = undefined;
+        }
         $scope.verMedicamentos = function(value) {
             $http.post('/medicamentos', {
                 "id_registro": value
