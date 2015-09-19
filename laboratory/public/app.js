@@ -160,6 +160,7 @@ angular.module('labApp', ['ui-notification', 'ui.router'])
             $http.post('/registros', {
                 'id_paciente': $('#pacientesel').val()
             }).success(function(response2) {
+                $('#registrosel').empty();
                 $scope.registries = response2;
                 $.each(response2, function(i, item) {
                     $('#registrosel').append($('<option>', {
