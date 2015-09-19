@@ -1,5 +1,17 @@
 'use strict';
-angular.module('doctorApp', ['ui.router'])
+angular.module('doctorApp', ['ui-notification', 'ui.router'])
+
+.config(function(NotificationProvider) {
+        NotificationProvider.setOptions({
+            delay: 1500,
+            startTop: 20,
+            startRight: 10,
+            verticalSpacing: 20,
+            horizontalSpacing: 20,
+            positionX: 'left',
+            positionY: 'bottom'
+        });
+    })
     .config([
         '$stateProvider',
         '$urlRouterProvider',
@@ -20,6 +32,16 @@ angular.module('doctorApp', ['ui.router'])
                     url: '/login',
                     templateUrl: 'views/login.view.html',
                     controller: 'loginCtrl'
+                })
+                .state('patients', {
+                    url: '/patients/:doctorID',
+                    templateUrl: 'views/tablapacientes.view.html',
+                    controller: 'patientCtrl'
+                })
+                .state('historial', {
+                    url: '/historial/:doctorID/:patientID',
+                    templateUrl: 'views/historial.view.html',
+                    controller: 'historialCtrl'
                 })
 
 
@@ -45,6 +67,10 @@ angular.module('doctorApp', ['ui.router'])
                             $('#sidebar-wrapper').hide()
                             window.location.href = '#/login'
                         }
+                        if (value == 3) {
+                            var url = "#/patients/" + $stateParams.doctorID
+                            window.location.href = url;
+                        }
 
                     }
                 }
@@ -52,13 +78,127 @@ angular.module('doctorApp', ['ui.router'])
         }
 
     )
-    .controller('registryCtrl', ['$scope', '$http', '$stateParams', function($scope, $http, $stateParams) {
+    .controller('historialCtrl', ['$scope', '$http', '$stateParams', function($scope, $http, $stateParams) {
+
+        $scope.registries;
+        $scope.symptoms;
+        $scope.medicines;
+        $scope.exams;
+        $scope.bills;
+        $scope.total = 0;
+        $http.post('/historial', {
+            "id_paciente": $stateParams.patientID
+        }).success(function(response) {
+            $scope.registries = response;
+
+        });
+        $scope.verFacturas = function(value) {
+            $http.post('/cuenta', {
+                "id_registro": value
+            }).success(function(response) {
+                $scope.bills = response;
+                if ($scope.exams == undefined)
+                    $scope.verExamenes(value);
+
+
+
+            });
+        }
+        $scope.verExamenes = function(value) {
+            $http.post('/examenes', {
+                "id_registro": value
+            }).success(function(response) {
+                $scope.exams = response;
+                $scope.total = 0;
+                $.each($scope.exams, function(index, element) {
+                    $scope.total += element.costo;
+                });
+                $scope.total += $scope.bills[0].honorarios;
+            });
+        }
+
+        $scope.verMedicamentos = function(value) {
+            $http.post('/medicamentos', {
+                "id_registro": value
+            }).success(function(response) {
+                $scope.medicines = response;
+            });
+        }
+        $scope.verSintomas = function(value) {
+            $http.post('/sintomas', {
+                "id_registro": value
+            }).success(function(response) {
+                $scope.symptoms = response;
+            });
+        }
+    }])
+    .controller('patientCtrl', ['$scope', '$http', '$stateParams', function($scope, $http, $stateParams) {
         $scope.doctorId = $stateParams.doctorID
         if ($scope.doctorId == '' || $scope.doctorId == 'undefined') {
             window.location.href = "#/login"
         } else {
             $('#sidebar-wrapper').show();
         }
+        $scope.patients;
+        $http.get('/pacientes').success(function(response) {
+            $scope.patients = response;
+        })
+        $scope.redirect = function(value) {
+            var url = "#/historial/" + $stateParams.doctorID + '/' + value;
+            window.location.href = url;
+
+        }
+    }])
+    .controller('registryCtrl', ['$scope', '$http', '$stateParams','Notification', function($scope, $http, $stateParams,Notification) {
+        $scope.doctorId = $stateParams.doctorID
+        $scope.registry;
+        $scope.sintomas = [];
+        $scope.medicinas = [];
+        if ($scope.doctorId == '' || $scope.doctorId == 'undefined') {
+            window.location.href = "#/login"
+        } else {
+            $('#sidebar-wrapper').show();
+        }
+        $http.get('/pacientes').success(function(response) {
+            $.each(response, function(i, item) {
+                $('#pacientesel').append($('<option>', {
+                    value: item.id_paciente,
+                    text: item.nombres + ' ' + item.apellidos
+                }))
+            });
+        })
+        $scope.agregarRegistro = function() {
+            $http.post('/registro', {
+                'id_paciente': $scope.registry.id_paciente,
+                'id_doctor': $scope.doctorId,
+                'tipo': $scope.registry.tipo,
+                'motivo': $scope.registry.motivo,
+                'diagnostico': $scope.registry.diagnostico
+            }).success(function(response) {
+
+                $.each($('.sintomas').children(), function(index, element) {
+                    $scope.sintomas.push($(element).text());
+                })
+                $http.post('/sintoma', {
+                    'id_paciente': $scope.registry.id_paciente,
+                    'sintomas': $scope.sintomas
+                }).success(function(response) {
+
+
+                })
+                $.each($('.medicamentos').children(), function(index, element) {
+                    $scope.medicinas.push($(element).text())
+                });
+                $http.post('/medicamento', {
+                    'id_paciente': $scope.registry.id_paciente,
+                    'medicinas': $scope.medicinas
+                }).success(function(response) {
+                    Notification.success('El registro fue agregado exitosamente');
+                })
+            })
+        }
+
+
 
     }])
     .controller('appointmentsCtrl', ['$scope', '$http', '$stateParams', function($scope, $http, $stateParams) {
@@ -68,6 +208,12 @@ angular.module('doctorApp', ['ui.router'])
         } else {
             $('#sidebar-wrapper').show();
         }
+        $scope.appointments;
+        $http.post('/citas', {
+            "id_doctor": $scope.doctorId
+        }).success(function(response) {
+            $scope.appointments = response;
+        })
 
     }])
     .controller('loginCtrl', ['$scope', '$http', '$stateParams', function($scope, $http, $stateParams) {
@@ -84,7 +230,7 @@ angular.module('doctorApp', ['ui.router'])
                     $('#sidebar-wrapper').show()
                 }
 
-            }).error(function(response){
+            }).error(function(response) {
                 $('.warning2').show();
             })
 

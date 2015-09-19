@@ -11,6 +11,9 @@
         <li>
             <a ng-click='redirect(1)'>Ver Citas Programadas</a>
         </li>
+          <li>
+            <a ng-click='redirect(3)'>Ver Historiales</a>
+        </li>
         <li>
             <a ng-click='redirect(2)'>Cerrar Sesión</a>
         </li>
@@ -20,6 +23,7 @@
 $('.menu-toggle').bind('click', function(e) {
     e.preventDefault();
     $("#wrapper").toggleClass("toggled");
+    $('.container-fluid').toggleClass('cftoggled')
     if ($('#togglemenu').hasClass('outmenu')) {
         $('#togglemenu').removeClass('outmenu');
     } else {

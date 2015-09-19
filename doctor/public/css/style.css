@@ -7,8 +7,9 @@ button {
     margin: 10px;
     background-color: #076;
     border-radius: 4px;
-    color:white;
+    color: white;
 }
+
 a.closebtn {
     margin: 20px;
 }
@@ -46,13 +47,14 @@ a.closebtn {
     width: 250px;
 }
 
-#page-content-wrapper {
+.container-fluid {
     width: 100%;
     position: absolute;
     padding: 15px;
+    margin-left: 290px;
 }
 
-#wrapper.toggled #page-content-wrapper {
+.cftoggled {
     position: absolute;
     margin-right: -250px;
 }
@@ -154,8 +156,6 @@ a.closebtn {
     margin-bottom: 100px;
     border-radius: 7px;
     opacity: 0.95;
-    margin-left: auto;
-    margin-right: auto;
     -webkit-box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.2);
 }
 
@@ -210,7 +210,8 @@ a.closebtn {
     padding: 0;
 }
 
-.warning,.warning2 {
+.warning,
+.warning2 {
     color: red;
     display: none;
 }
