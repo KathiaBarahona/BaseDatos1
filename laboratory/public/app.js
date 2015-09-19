@@ -181,17 +181,12 @@ angular.module('labApp', ['ui-notification', 'ui.router'])
 
             })
         })
-        $('#registrosel').change(function() {
-            $http.post('/examenes', {
-                'id_registro': $('#registrosel').val()
-            }).success(function(response) {
-                $scope.exams = response;
-            })
-        });
+       
         $scope.generateBill = function() {
             $http.post('/cuenta', {
                 'id_registro': $('#registrosel').val()
             }).success(function(response) {
+                $scope.emptyExams();
                 $scope.bill = response[0];
                 $scope.total = 0;
                 $scope.total += $scope.bill.honorarios;
@@ -203,11 +198,15 @@ angular.module('labApp', ['ui-notification', 'ui.router'])
                         $.each($scope.exams, function(index, element) {
                             $scope.total += element.costo;
                         });
+                        console.log($scope.total)
                     })
 
             }).error(function(response) {
                 Notification.error('Asegurese de llenar todos los campos');
             })
+        }
+        $scope.emptyExams = function(){
+            $scope.exams = undefined;
         }
 
     }])
