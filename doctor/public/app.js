@@ -41,7 +41,7 @@ angular.module('doctorApp', ['ui.router'])
                             var url = "#/appointments/" + $stateParams.doctorID
                             window.location.href = url;
                         }
-                        if(value == 2){
+                        if (value == 2) {
                             $('#sidebar-wrapper').hide()
                             window.location.href = '#/login'
                         }
@@ -56,17 +56,19 @@ angular.module('doctorApp', ['ui.router'])
         $scope.doctorId = $stateParams.doctorID
         if ($scope.doctorId == '' || $scope.doctorId == 'undefined') {
             window.location.href = "#/login"
-        }else{
+        } else {
             $('#sidebar-wrapper').show();
         }
+
     }])
     .controller('appointmentsCtrl', ['$scope', '$http', '$stateParams', function($scope, $http, $stateParams) {
         $scope.doctorId = $stateParams.doctorID
         if ($scope.doctorId == '' || $scope.doctorId == 'undefined') {
             window.location.href = "#/login"
-        }else{
+        } else {
             $('#sidebar-wrapper').show();
         }
+
     }])
     .controller('loginCtrl', ['$scope', '$http', '$stateParams', function($scope, $http, $stateParams) {
 
@@ -82,6 +84,9 @@ angular.module('doctorApp', ['ui.router'])
                     $('#sidebar-wrapper').show()
                 }
 
+            }).error(function(response){
+                console.log(response)
+                $('.warning2').show();
             })
 
         }

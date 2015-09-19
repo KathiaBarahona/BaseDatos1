@@ -127,14 +127,14 @@
                     <tbody>
                          <tr ng-repeat='exam in exams'>
                             <td>{{exam.tipo}}</td>
-                            <td>{{exam.costo}}</td>
+                            <td>L. {{exam.costo}}.00</td>
                         </tr>
                     </tbody>
                 </table>
-                <label>Honorarios: </label>{{bill.honorarios}}
+                <label>Honorarios: </label>L.{{bill.honorarios}}.00
                 <br>
                 <br>
-                <label>Total a Pagar: </label>
+                <label>Total a Pagar: </label>L.{{total}}.00
                 <br>
                 <br>
             </div>

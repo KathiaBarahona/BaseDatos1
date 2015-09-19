@@ -16,3 +16,15 @@
         </li>
     </ul>
 </div>
+<script type="text/javascript">
+$('.menu-toggle').bind('click', function(e) {
+    e.preventDefault();
+    $("#wrapper").toggleClass("toggled");
+    if ($('#togglemenu').hasClass('outmenu')) {
+        $('#togglemenu').removeClass('outmenu');
+    } else {
+        $('#togglemenu').addClass('outmenu');
+    }
+
+})
+</script>

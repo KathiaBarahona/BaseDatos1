@@ -3,6 +3,16 @@ body {
     background-repeat: repeat;
 }
 
+button {
+    margin: 10px;
+    background-color: #076;
+    border-radius: 4px;
+    color:white;
+}
+a.closebtn {
+    margin: 20px;
+}
+
 #wrapper {
     padding-left: 0;
     -webkit-transition: all 0.5s ease;
@@ -199,10 +209,12 @@ body {
 #page-content-wrapper {
     padding: 0;
 }
-.warning{
+
+.warning,.warning2 {
     color: red;
     display: none;
 }
+
 .form-group {
     font-family: 'Sorts Mill Goudy', serif;
     font-size: 15px;
@@ -214,7 +226,6 @@ body {
     font-size: 30px;
     color: #342A2E;
 }
-
 
 .panel-login>.panel-heading {
     color: #00415d;

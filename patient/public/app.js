@@ -112,6 +112,7 @@ angular.module('patientApp', ['ui-notification', 'ui.router'])
         $scope.medicines;
         $scope.exams;
         $scope.bills;
+        $scope.total=0;
         $http.post('/historial', {
             "id_paciente": $scope.patientid
         }).success(function(response) {
@@ -125,6 +126,9 @@ angular.module('patientApp', ['ui-notification', 'ui.router'])
                 $scope.bills = response;
                 if($scope.exams == undefined)
                     $scope.verExamenes(value);
+
+                
+                
             });
         }
         $scope.verExamenes = function(value) {
@@ -132,6 +136,11 @@ angular.module('patientApp', ['ui-notification', 'ui.router'])
                 "id_registro": value
             }).success(function(response) {
                 $scope.exams = response;
+                $scope.total=0;
+                $.each($scope.exams,function(index,element){
+                     $scope.total += element.costo;
+                });
+                $scope.total+= $scope.bills[0].honorarios;
             });
         }
 
@@ -227,7 +236,9 @@ angular.module('patientApp', ['ui-notification', 'ui.router'])
                     $('warning2').show();
                 }
 
-            });
+            }).error(function(response){
+                $('.warning2').show();
+            })
         }
         $scope.valid = function() {
             var bool = true;

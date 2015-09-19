@@ -64,10 +64,11 @@
              res.status(400).end();
          } else {
              var request = connection.request();
-             request.query("insert into Pacientes values('" + req.body.id_paciente + "','" + req.body.nombres + "','" + req.body.apellidos + "','" + req.body.contac_emer + "','" + req.body.ocupacion + "','" + req.body.email + "','" + req.body.fecha_nac + "','" + req.body.estado_marital + "','" + req.body.sexo + "','" + req.body.tipo_sangre + "','" + req.body.direccion + "','" + req.body.fecha_registro + "','" + req.body.password + "')",
+             request.query("insert into Pacientes values('" + req.body.id_paciente + "','" + req.body.nombres + "','" + req.body.apellidos + "','" + req.body.contact_emer + "','" + req.body.ocupacion + "','" + req.body.email + "','" + req.body.fecha_nac + "','" + req.body.estado_marital + "','" + req.body.sexo + "','" + req.body.tipo_sangre + "','" + req.body.direccion + "','" + req.body.fecha_registro + "','" + req.body.password + "')",
                  function(err, recordset) {
                      if (err) {
                          console.log("Error query");
+                         console.log(err)
                          res.status(400).end();
                      } else {
                          res.status(200).end();
